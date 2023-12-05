@@ -37,8 +37,10 @@ const Navigation = () => {
   };
 
   const StyledAppBar = styled(AppBar)(({ theme }) => ({
+    height: "90px",
+
     [theme.breakpoints.up("sm")]: {
-      height: "80px",
+      height: "90px",
     },
   }));
 
@@ -53,6 +55,7 @@ const Navigation = () => {
   const StyledNavMenu = styled(Box)(({ theme }) => ({
     fontFamily: "Titillium Web",
     fontWeight: 600,
+    display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "flex",
       justifyContent: "flex-end",

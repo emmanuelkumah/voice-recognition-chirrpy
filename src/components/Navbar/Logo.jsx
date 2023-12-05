@@ -7,6 +7,7 @@ const Logo = () => {
   const StyledBox = styled(Box)(({ theme }) => ({
     display: "flex",
     color: "#881600",
+    height: "58px",
   }));
   const StyledLogo = styled(Typography)(({ theme }) => ({
     fontFamily: "Monomaniac One",
