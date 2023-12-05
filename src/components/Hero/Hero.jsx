@@ -7,19 +7,19 @@ import heroImage from "../../assets/images/heroImg.png";
 const Hero = () => {
   const HeroContainer = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.main,
-
+    position: "relative",
     flexGrow: 1,
-    height: "650px",
+    [theme.breakpoints.up("sm")]: {
+      height: "650px",
+    },
   }));
 
   const StyledHeroHeading = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main,
     fontFamily: theme.typography.heading.fontFamily,
-    fontWeight: theme.typography.heading.fontWeight,
     fontSize: "45px",
     [theme.breakpoints.up("sm")]: {
       fontSize: "56px",
-      fontWeight: 700,
       lineHeight: "61px",
       letterSpacing: "2.24px",
       paddingRight: "50px",
@@ -53,13 +53,22 @@ const Hero = () => {
 
   const StyledBlurBox = styled("div")(({ theme }) => ({
     position: "absolute",
-    top: "12%",
-    right: "5%",
-    width: "250px",
-    height: "250px",
+    bottom: "30%",
+    right: "10%",
+    width: "100px",
+    height: "100px",
     background: "#881600",
     borderRadius: "50%",
-    filter: "blur(90px)",
+    filter: "blur(40px)",
+    [theme.breakpoints.up("sm")]: {
+      position: "absolute",
+      top: "26%",
+      right: "-10%",
+      width: "400px",
+      height: "400px",
+      background: "#881600",
+      borderRadius: "50%",
+    },
   }));
 
   return (

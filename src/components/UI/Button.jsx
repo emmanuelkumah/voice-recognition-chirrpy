@@ -9,6 +9,7 @@ const Btn = ({ text, variant }) => {
     width: "150px",
     height: "54px",
     textTransform: "capitalize",
+    fontFamily: "Poppins",
     fontWeight: "600",
     [theme.breakpoints.up("sm")]: {
       width: "200px",
