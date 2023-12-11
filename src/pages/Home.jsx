@@ -4,6 +4,7 @@ import Hero from "../components/Hero/Hero";
 
 import Reasons from "../components/Reasons/Reasons";
 import HowItWorks from "../components/HowItWorks/HowItWorks";
+import UseCases from "../components/UseCases/UseCases";
 
 const Home = () => {
   return (
@@ -11,7 +12,8 @@ const Home = () => {
       <Navigation />
       <Hero />
       <Reasons />
-    <HowItWorks />
+      <HowItWorks />
+      <UseCases />
     </>
   );
 };

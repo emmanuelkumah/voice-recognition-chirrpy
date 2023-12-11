@@ -1,10 +1,40 @@
 import React from "react";
 import { Typography, Box, styled, Container, Grid, Paper } from "@mui/material";
 import { theme } from "../../theme";
-import HowItWorksCard from "../UI/HowItWorksCard";
 import icon from "../../assets/images/icon.png";
 
 const HowItWorks = () => {
+  const data = [
+    {
+      id: 1,
+      bgColor: "#6A381F",
+      text: "Click on the mic icon to start recording or upload an audio file from you device",
+      icon,
+      radius: "10px 0px 0px 10px",
+    },
+    {
+      id: 2,
+      bgColor: "#774E24",
+      text: "Transcribe your voice to text using our AI powered voice recognition software ",
+      icon,
+      radius: "0px",
+    },
+    {
+      id: 3,
+      bgColor: "#A5907E",
+      text: "Perform preferred actions on the output and finally download the text ",
+      icon,
+      radius: "0px 10px 10px 0px",
+    },
+  ];
+
+  const commonTypographyStyles = {
+    display: "grid",
+    placeItems: "center",
+    padding: "38px 54px 38px 43px",
+    lineHeight: "28.8px",
+  };
+
   const StyledSectionBackground = styled(Box)(({ theme }) => ({
     background: theme.palette.secondary.main,
     height: "auto",
@@ -16,29 +46,6 @@ const HowItWorks = () => {
     top: "15%",
   }));
 
-  const data = [
-    {
-      id: 1,
-      bgColor: "#6A381F",
-      text: "Click on the mic icon to start recording or upload an audio file from you device",
-      icon: icon,
-      radius: "10px 0px 0px 10px",
-    },
-    {
-      id: 2,
-      bgColor: "#774E24",
-      text: "Transcribe your voice to text using our AI powered voice recognition software ",
-      icon: icon,
-      radius: "0px",
-    },
-    {
-      id: 3,
-      bgColor: "#A5907E",
-      text: "Perform preferred actions on the output and finally download the text ",
-      icon: icon,
-      radius: "0px 10px 10px 0px",
-    },
-  ];
   return (
     <>
       <StyledSectionBackground>
@@ -81,12 +88,9 @@ const HowItWorks = () => {
                   }}
                 >
                   <Typography
-                    variant="body"
+                    variant="body1"
                     sx={{
-                      display: "grid",
-                      placeItems: "center",
-                      padding: "38px 54px 38px 43px",
-                      lineHeight: "28.8px",
+                      ...commonTypographyStyles,
                     }}
                   >
                     {item.text}
