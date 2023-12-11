@@ -60,6 +60,8 @@ const Hero = () => {
   }));
 
   const StyledBlurBackground = styled(CardMedia)(() => ({
+    position: "absolute",
+    top: "-25%",
     [theme.breakpoints.up("sm")]: {
       position: "absolute",
       top: "-20%",
