@@ -1,8 +1,16 @@
-import { Box, Container, Grid, Typography, styled } from "@mui/material";
+import {
+  Box,
+  CardMedia,
+  Container,
+  Grid,
+  Typography,
+  styled,
+} from "@mui/material";
 import React from "react";
 import { theme } from "../../theme";
 import Btn from "../UI/Button";
 import heroImage from "../../assets/images/heroImg.png";
+import heroBlur from "../../assets/images/heroBlur.png";
 
 const Hero = () => {
   const HeroContainer = styled(Box)(({ theme }) => ({
@@ -22,7 +30,7 @@ const Hero = () => {
       fontSize: "56px",
       lineHeight: "61px",
       letterSpacing: "2.24px",
-      paddingRight: "50px",
+      paddingRight: "150px",
       marginTop: "58px",
       letter: "4%",
     },
@@ -51,23 +59,11 @@ const Hero = () => {
     },
   }));
 
-  const StyledBlurBox = styled("div")(({ theme }) => ({
-    position: "absolute",
-    bottom: "30%",
-    right: "10%",
-    width: "100px",
-    height: "100px",
-    background: "#881600",
-    borderRadius: "50%",
-    filter: "blur(40px)",
+  const StyledBlurBackground = styled(CardMedia)(() => ({
     [theme.breakpoints.up("sm")]: {
       position: "absolute",
-      top: "26%",
-      right: "-10%",
-      width: "400px",
-      height: "400px",
-      background: "#881600",
-      borderRadius: "50%",
+      top: "-20%",
+      left: "25%",
     },
   }));
 
@@ -94,7 +90,7 @@ const Hero = () => {
               </StyledButtonBox>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6} sx={{ position: "relative" }}>
             <img
               src={heroImage}
               alt="Young lady with disability using the voice recognition app"
@@ -102,7 +98,11 @@ const Hero = () => {
                 width: "100%",
               }}
             />
-            <StyledBlurBox></StyledBlurBox>
+            <StyledBlurBackground
+              component="img"
+              image={heroBlur}
+              alt="Crimson blur background on the right of the hero"
+            />
           </Grid>
         </Grid>
       </Container>
