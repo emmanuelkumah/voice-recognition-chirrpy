@@ -8,6 +8,12 @@ const ReasonCard = ({ data, text, subText, number }) => {
     marginTop: "5px",
     marginBottom: "5px",
     position: "relative",
+    boxShadow: "4px 4px 4px 0px #00000040",
+
+    [theme.breakpoints.up("sm")]: {
+      width: "339px",
+      height: "109px",
+    },
   }));
 
   const StyledStack = styled(Stack)(({ theme }) => ({
@@ -18,13 +24,18 @@ const ReasonCard = ({ data, text, subText, number }) => {
     fontFamily: "Poppins",
     color: theme.palette.primary.main,
     textAlign: "center",
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "43px",
+    },
   }));
 
   const StyledReason = styled(Typography)(({ theme }) => ({
     fontSize: "13px",
     fontFamily: "Poppins",
-
     color: "#0D090A",
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "12px",
+    },
   }));
   const StyledSubText = styled(Typography)(({ theme }) => ({
     fontSize: "14px",
@@ -40,6 +51,9 @@ const ReasonCard = ({ data, text, subText, number }) => {
     width: "30px",
     position: "absolute",
     top: "-10%",
+    [theme.breakpoints.up("sm")]: {
+      left: "4%",
+    },
   }));
 
   const StyledNumber = styled(Typography)(() => ({
