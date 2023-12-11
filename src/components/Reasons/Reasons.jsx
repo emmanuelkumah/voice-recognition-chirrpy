@@ -128,7 +128,7 @@ const Reasons = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Box sx={{ flexGrow: 1, marginTop: "50px" }}>
+            <Box sx={{ flexGrow: 1, marginTop: { xs: "10px", sm: "50px" } }}>
               <Grid container spacing={5} direction="column">
                 <Grid item xs={12} sm={6}>
                   <ReasonCard

@@ -42,7 +42,7 @@ const ReasonCard = ({ data, text, subText, number }) => {
     fontFamily: "Poppins",
     color: theme.palette.primary.main,
     position: "absolute",
-    left: "15%",
+    left: "10%",
   }));
   const StyledDiv = styled("div")(() => ({
     backgroundColor: "#FFC801",
