@@ -12,6 +12,9 @@ export const theme = createTheme({
     },
   },
   typography: {
+    fontFamily: ["Poppins", "cursive"].join(","),
+    fontSize: 16,
+    fontWeight: 400,
     logo: {
       fontSize: 40,
       fontFamily: "Monomaniac One",
@@ -27,11 +30,7 @@ export const theme = createTheme({
       fontWeight: 700,
       fontFamily: "Titillium Web",
     },
-    body: {
-      fontSize: 18,
-      fontWeight: 400,
-      fontFamily: "Poppins",
-    },
+
     breakpoints: {
       values: {
         xs: 0,
