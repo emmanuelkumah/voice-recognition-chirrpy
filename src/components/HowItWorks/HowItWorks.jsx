@@ -68,7 +68,6 @@ const HowItWorks = () => {
             sx={{
               display: "grid",
               placeItems: "center",
-              fontSize: "18px",
               lineHeight: "28.8px",
             }}
           >

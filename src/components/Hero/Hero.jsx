@@ -44,7 +44,6 @@ const Hero = () => {
   const StyledHeroDescription = styled(Typography)(({ theme }) => ({
     lineHeight: "34.2px",
     [theme.breakpoints.up("sm")]: {
-      fontFamily: "Poppins",
       letterSpacing: "4%",
       marginTop: "24px",
     },
