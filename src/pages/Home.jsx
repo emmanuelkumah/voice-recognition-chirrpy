@@ -5,6 +5,7 @@ import Hero from "../components/Hero/Hero";
 import Reasons from "../components/Reasons/Reasons";
 import HowItWorks from "../components/HowItWorks/HowItWorks";
 import UseCases from "../components/UseCases/UseCases";
+import Features from "../components/Features/Features";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <Reasons />
       <HowItWorks />
       <UseCases />
+      <Features />
     </>
   );
 };

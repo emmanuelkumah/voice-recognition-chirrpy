@@ -1,12 +1,12 @@
 import { Box, Typography, styled, Stack, Grid } from "@mui/material";
 import { theme } from "../../theme";
-import givingLogo from "../../assets/images/giving.png";
-import unity from "../../assets/images/unityLogo.png";
+import globalGivingLogo from "../../assets/images/global.png";
+import unityLogo from "../../assets/images/unity.png";
 import sweetHomeLogo from "../../assets/images/sweethome.png";
-import helpingHandLogo from "../../assets/images/helpingHand.png";
-import communities from "../../assets/images/communities.png";
+import helpingHandLogo from "../../assets/images/helpingHands.png";
+
 const UseBrands = () => {
-  const logo = [sweetHomeLogo, givingLogo, unity, helpingHandLogo, communities];
+  const logos = [sweetHomeLogo, globalGivingLogo, unityLogo, helpingHandLogo];
 
   const StyledSectionBackground = styled(Box)(({ theme }) => ({
     background: theme.palette.primary.main,
@@ -16,25 +16,15 @@ const UseBrands = () => {
   }));
 
   const StyledLogo = styled("img")(({ theme }) => ({
-    width: "30%",
-    height: "30%",
+    width: "50%",
+    height: "50%",
     margin: "10px 10px",
     [theme.breakpoints.up("sm")]: {
-      width: "110px",
-      height: "80px",
-      marginBottom: "40px",
+      width: "130px",
+      height: "100px",
     },
   }));
-  const StyledStack = styled(Stack)(({ theme }) => ({
-    direction: "column",
-    placeItems: "center",
-    [theme.breakpoints.up("sm")]: {
-      direction: "row",
-      display: "flex",
-      justifyContent: "space-evenly",
-      paddingTop: "5%",
-    },
-  }));
+
   const StyledHeading = styled(Typography)(({ theme }) => ({
     color: "white",
     fontSize: "30px",
@@ -50,25 +40,30 @@ const UseBrands = () => {
     },
   }));
 
+  const StyledSubHeadingTypography = styled(Typography)(({ theme }) => ({
+    color: "white",
+    padding: "10px 10px",
+    [theme.breakpoints.up("sm")]: {
+      paddingLeft: "30px",
+    },
+  }));
+
   return (
     <>
       <StyledSectionBackground>
         <StyledHeading variant="h3">
           Providing Transcription Services To Empower Businesses
         </StyledHeading>
-        <Typography
-          sx={{
-            color: "white",
-            padding: { xs: "13px" },
-          }}
-        >
+        <StyledSubHeadingTypography variant="subtitle1">
           With Chirrpy, you do the talking, we take care of the rest
-        </Typography>
-        <StyledStack>
-          {logo.map((logo) => (
-            <StyledLogo src={logo} key={logo} />
+        </StyledSubHeadingTypography>
+        <Grid container spacing={2}>
+          {logos.map((logo) => (
+            <Grid item xs={12} sm={3} key={logo} sx={{ marginBottom: "10px" }}>
+              <StyledLogo src={logo} alt={logo} />
+            </Grid>
           ))}
-        </StyledStack>
+        </Grid>
       </StyledSectionBackground>
     </>
   );
