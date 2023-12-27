@@ -24,7 +24,6 @@ const Hero = () => {
 
   const StyledHeroHeading = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main,
-    fontFamily: theme.typography.heading.fontFamily,
     fontSize: "45px",
     [theme.breakpoints.up("sm")]: {
       fontSize: "56px",
@@ -74,11 +73,11 @@ const Hero = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <Box>
-              <StyledHeroHeading variant="h2">
+              <StyledHeroHeading variant="h1">
                 Expand Accessibility Improve Productivity
               </StyledHeroHeading>
               <StyledDescriptionBox>
-                <StyledHeroDescription variant="subtitle1">
+                <StyledHeroDescription variant="body1">
                   Embrace the convenience of hands-free communication and
                   effortlessly transcribe your thoughts and ideas into written
                   form.
