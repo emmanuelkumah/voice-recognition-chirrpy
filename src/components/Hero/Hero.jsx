@@ -25,6 +25,7 @@ const Hero = () => {
   const StyledHeroHeading = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main,
     fontSize: "45px",
+    lineHeight: "normal",
     [theme.breakpoints.up("sm")]: {
       fontSize: "56px",
       lineHeight: "61px",
@@ -101,7 +102,7 @@ const Hero = () => {
             <StyledBlurBackground
               component="img"
               image={heroBlur}
-              alt="Crimson blur background on the right of the hero"
+              alt="Crimson blur background on the right of the hero image"
             />
           </Grid>
         </Grid>
