@@ -13,11 +13,12 @@ const Home = () => {
     <>
       <Navigation />
       <Hero />
+      {/* <Hero />
       <Reasons />
       <HowItWorks />
       <UseCases />
       <Features />
-      <Footer />
+      <Footer /> */}
     </>
   );
 };

@@ -49,3 +49,11 @@ export const featuresData = [
     imageUrl: wordIcon,
   },
 ];
+
+export const navItems = [
+  "Home",
+  "Why Chirrpy",
+  "How It Works",
+  "Use Cases",
+  "Features",
+];

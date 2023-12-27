@@ -4,7 +4,7 @@ import gitIcon from "../assets/images/gitIcon.png";
 
 const Footer = () => {
   return (
-    <Box sx={{ borderBottom: "10px solid green" }}>
+    <Box >
       <Container>
         <Grid container>
           <Grid item xs={12} sm={4}>
