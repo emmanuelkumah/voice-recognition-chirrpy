@@ -21,6 +21,11 @@ export const theme = createTheme({
       lineHeight: 61,
       fontFamily: "Titillium Web",
     },
+    h3: {
+      fontSize: 30,
+      fontWeight: 700,
+      fontFamily: "Titillium Web",
+    },
     subHeading: {
       fontSize: 36,
       fontWeight: 700,
