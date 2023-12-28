@@ -6,9 +6,6 @@ import {
   Container,
   Grid,
   styled,
-  Paper,
-  getPaperUtilityClass,
-  Stack,
   CardMedia,
 } from "@mui/material";
 
@@ -17,6 +14,7 @@ import vrImage from "../../assets/images/boyWithPhone.jpeg";
 import bigEllipse from "../../assets/images/ellipse.png";
 import blurYellow from "../../assets/images/blurYellow.png";
 import ReasonCard from "../UI/ReasonCard";
+import { reasonsData } from "../../componentData/data";
 
 const Reasons = () => {
   const StyledBox = styled(Box)(({ theme }) => ({
@@ -73,9 +71,6 @@ const Reasons = () => {
     },
   }));
   const StyledHeading = styled(Typography)(({ theme }) => ({
-    fontSize: "30px",
-    fontFamily: "Titillium Web",
-    fontWeight: "700",
     marginTop: "20px",
     textTransform: "capitalize",
     [theme.breakpoints.up("sm")]: {
@@ -84,14 +79,7 @@ const Reasons = () => {
     },
   }));
 
-  const StyledSubtext = styled(Typography)(({ theme }) => ({
-    fontSize: "18px",
-    fontFamily: "Poppins",
-    fontWeight: "400",
-    textAlign: "center",
-  }));
-
-  const StyledReasonTwo = styled(Grid)(({ theme }) => ({
+  const StyledSecondGridItem = styled(Grid)(({ theme }) => ({
     [theme.breakpoints.up("sm")]: {
       position: "relative",
       left: "30%",
@@ -103,10 +91,10 @@ const Reasons = () => {
     <StyledBox>
       <Container maxWidth="lg">
         <Box sx={{ color: "#fff", display: "grid", placeItems: "center" }}>
-          <StyledHeading variant="h3">Why we built chirrpy</StyledHeading>
-          <StyledSubtext variant="subtitle1">
+          <StyledHeading variant="h3">Why we built Chirrpy</StyledHeading>
+          <Typography variant="body1" align="center">
             The voice recognition app you’ve always wanted
-          </StyledSubtext>
+          </Typography>
         </Box>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} sx={{ position: "relative" }}>
@@ -130,30 +118,29 @@ const Reasons = () => {
           <Grid item xs={12} sm={6}>
             <Box sx={{ flexGrow: 1, marginTop: { xs: "10px", sm: "50px" } }}>
               <Grid container spacing={5} direction="column">
-                <Grid item xs={12} sm={6}>
-                  <ReasonCard
-                    text="Of the world’s population has some form of physical disability which
-          prevents them from using the computer keyboard"
-                    data="15%"
-                    number="1"
-                  />
-                </Grid>
-                <StyledReasonTwo item xs={12} sm={6}>
-                  <ReasonCard
-                    text="Repetitive Stress Injury (RSI)is a common workplace complaint caused by repetitive keyboard and mouse tasks"
-                    data="RSI"
-                    subText="Avoid"
-                    number="2"
-                  />
-                </StyledReasonTwo>
-                <Grid item xs={12} sm={6}>
-                  <ReasonCard
-                    text="It is clear that voice input can offer a faster alternative to typing for many individuals. "
-                    data="3X"
-                    subText="Faster"
-                    number="3"
-                  />
-                </Grid>
+                {reasonsData.map((reason, index) =>
+                  index === 1 ? (
+                    <StyledSecondGridItem item>
+                      <ReasonCard
+                        key={reason.id}
+                        data={reason.data}
+                        text={reason.text}
+                        supText={reason.supText}
+                        number={reason.number}
+                      />
+                    </StyledSecondGridItem>
+                  ) : (
+                    <Grid item>
+                      <ReasonCard
+                        key={reason.id}
+                        data={reason.data}
+                        text={reason.text}
+                        number={reason.number}
+                        subText={reason.subText}
+                      />
+                    </Grid>
+                  )
+                )}
               </Grid>
               <StyledYellowBlurRight
                 component="img"

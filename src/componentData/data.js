@@ -57,3 +57,28 @@ export const navItems = [
   "Use Cases",
   "Features",
 ];
+
+export const reasonsData = [
+  {
+    id: 1,
+    text: `Of the world’s population has some form of physical disability which
+  prevents them from using the computer keyboard`,
+    data: "15%",
+    number: "1",
+    supText: "",
+  },
+  {
+    id: 2,
+    text: `Repetitive Stress Injury (RSI)is a common workplace complaint caused by repetitive keyboard and mouse tasks`,
+    data: "RSI",
+    number: "2",
+    supText: "Avoid",
+  },
+  {
+    id: 3,
+    text: `It is clear that voice input can offer a faster alternative to typing for many individuals`,
+    data: "3X",
+    number: "3",
+    supText: "Faster",
+  },
+];

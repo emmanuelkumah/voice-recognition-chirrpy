@@ -2,7 +2,7 @@ import { Paper, Typography, Stack, styled } from "@mui/material";
 import React from "react";
 import { theme } from "../../theme";
 
-const ReasonCard = ({ data, text, subText, number }) => {
+const ReasonCard = ({ data, text, supText, number }) => {
   const StyledCard = styled(Paper)(({ theme }) => ({
     borderRadius: "10px",
     marginTop: "5px",
@@ -21,9 +21,7 @@ const ReasonCard = ({ data, text, subText, number }) => {
   }));
   const StyledData = styled(Typography)(({ theme }) => ({
     fontSize: "60px",
-    fontFamily: "Poppins",
     color: theme.palette.primary.main,
-    textAlign: "center",
     [theme.breakpoints.up("sm")]: {
       fontSize: "43px",
     },
@@ -31,7 +29,6 @@ const ReasonCard = ({ data, text, subText, number }) => {
 
   const StyledReason = styled(Typography)(({ theme }) => ({
     fontSize: "13px",
-    fontFamily: "Poppins",
     color: "#0D090A",
     [theme.breakpoints.up("sm")]: {
       fontSize: "12px",
@@ -39,7 +36,6 @@ const ReasonCard = ({ data, text, subText, number }) => {
   }));
   const StyledSubText = styled(Typography)(({ theme }) => ({
     fontSize: "14px",
-    fontFamily: "Poppins",
     color: theme.palette.primary.main,
     position: "absolute",
     left: "10%",
@@ -56,21 +52,18 @@ const ReasonCard = ({ data, text, subText, number }) => {
     },
   }));
 
-  const StyledNumber = styled(Typography)(() => ({
-    textAlign: "center",
-    fontSize: "20px",
-  }));
-
   return (
     <div>
       <StyledCard>
         <StyledDiv>
-          <StyledNumber variant="h4">{number}</StyledNumber>
+          <Typography variant="body1" align="center">
+            {number}
+          </Typography>
         </StyledDiv>
         <StyledStack direction="row" spacing={2}>
-          <StyledSubText>{subText}</StyledSubText>
-          <StyledData>{data}</StyledData>
-          <StyledReason>{text}</StyledReason>
+          <StyledSubText>{supText}</StyledSubText>
+          <StyledData align="center">{data}</StyledData>
+          <StyledReason variant="body1">{text}</StyledReason>
         </StyledStack>
       </StyledCard>
     </div>
