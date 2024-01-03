@@ -120,7 +120,7 @@ const Reasons = () => {
               <Grid container spacing={5} direction="column">
                 {reasonsData.map((reason, index) =>
                   index === 1 ? (
-                    <StyledSecondGridItem item>
+                    <StyledSecondGridItem item key={reason.id}>
                       <ReasonCard
                         key={reason.id}
                         data={reason.data}
@@ -130,13 +130,13 @@ const Reasons = () => {
                       />
                     </StyledSecondGridItem>
                   ) : (
-                    <Grid item>
+                    <Grid item key={reason.id}>
                       <ReasonCard
                         key={reason.id}
                         data={reason.data}
                         text={reason.text}
                         number={reason.number}
-                        subText={reason.subText}
+                        supText={reason.supText}
                       />
                     </Grid>
                   )
