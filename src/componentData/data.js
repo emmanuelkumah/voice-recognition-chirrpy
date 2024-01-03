@@ -6,6 +6,7 @@ import usersIcon from "../assets/images/users.png";
 import translateIcon from "../assets/images/Languages.png";
 import entityIcon from "../assets/images/user.png";
 import wordIcon from "../assets/images/word.png";
+import icon from "../assets/images/icon.png";
 
 export const featuresData = [
   {
@@ -80,5 +81,29 @@ export const reasonsData = [
     data: "3X",
     number: "3",
     supText: "Faster",
+  },
+];
+
+export const howItWorksData = [
+  {
+    id: 1,
+    bgColor: "#6A381F",
+    text: "Click on the mic icon to start recording or upload an audio file from you device",
+    icon,
+    radius: "10px 0px 0px 10px",
+  },
+  {
+    id: 2,
+    bgColor: "#774E24",
+    text: "Transcribe your voice to text using our AI powered voice recognition software ",
+    icon,
+    radius: "0px",
+  },
+  {
+    id: 3,
+    bgColor: "#A5907E",
+    text: "Perform preferred actions on the output and finally download the text ",
+    icon,
+    radius: "0px 10px 10px 0px",
   },
 ];

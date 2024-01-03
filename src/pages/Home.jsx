@@ -14,6 +14,7 @@ const Home = () => {
       <Navigation />
       <Hero />
       <Reasons />
+      <HowItWorks />
 
       {/* <Hero />
       <Reasons />

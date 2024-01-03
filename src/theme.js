@@ -22,7 +22,7 @@ export const theme = createTheme({
       fontFamily: "Titillium Web",
     },
     h3: {
-      fontSize: 30,
+      fontSize: 36,
       fontWeight: 700,
       fontFamily: "Titillium Web",
     },
