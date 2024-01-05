@@ -1,13 +1,8 @@
 import { Box, Typography, styled, Stack, Grid } from "@mui/material";
 import { theme } from "../../theme";
-import globalGivingLogo from "../../assets/images/global.png";
-import unityLogo from "../../assets/images/unity.png";
-import sweetHomeLogo from "../../assets/images/sweethome.png";
-import helpingHandLogo from "../../assets/images/helpingHands.png";
+import { logos } from "../../componentData/data";
 
 const UseBrands = () => {
-  const logos = [sweetHomeLogo, globalGivingLogo, unityLogo, helpingHandLogo];
-
   const StyledSectionBackground = styled(Box)(({ theme }) => ({
     background: theme.palette.primary.main,
     height: "auto",
@@ -30,9 +25,6 @@ const UseBrands = () => {
     fontSize: "30px",
     padding: "10px 10px",
     [theme.breakpoints.up("sm")]: {
-      fontFamily: theme.typography.heading.fontFamily,
-      fontWeight: theme.typography.heading.fontWeight,
-      fontSize: "36px",
       lineHeight: "37px",
       paddingTop: "23px",
       paddingLeft: "33px",
@@ -54,7 +46,7 @@ const UseBrands = () => {
         <StyledHeading variant="h3">
           Providing Transcription Services To Empower Businesses
         </StyledHeading>
-        <StyledSubHeadingTypography variant="subtitle1">
+        <StyledSubHeadingTypography variant="body1">
           With Chirrpy, you do the talking, we take care of the rest
         </StyledSubHeadingTypography>
         <Grid container spacing={2}>

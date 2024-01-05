@@ -18,8 +18,7 @@ const UseCaseCard = ({ heading, details, image, alt, index, yellowCircle }) => {
 
   const StyledHeadingTypography = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main,
-    fontFamily: theme.typography.heading.fontFamily,
-    fontWeight: theme.typography.heading.fontWeight,
+
     fontSize: "30px",
     textTransform: "capitalize",
     [theme.breakpoints.up("sm")]: {

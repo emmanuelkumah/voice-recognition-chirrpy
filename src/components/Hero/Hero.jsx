@@ -25,7 +25,7 @@ const Hero = () => {
   const StyledHeroHeading = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main,
     fontSize: "45px",
-    lineHeight: "normal",
+    lineHeight: "40px",
     [theme.breakpoints.up("sm")]: {
       fontSize: "56px",
       lineHeight: "61px",
@@ -42,10 +42,11 @@ const Hero = () => {
     },
   }));
   const StyledHeroDescription = styled(Typography)(({ theme }) => ({
-    lineHeight: "34.2px",
+    lineHeight: "30.2px",
+    marginTop: "24px",
+
     [theme.breakpoints.up("sm")]: {
       letterSpacing: "4%",
-      marginTop: "24px",
     },
   }));
 
@@ -69,7 +70,7 @@ const Hero = () => {
   }));
 
   return (
-    <HeroContainer>
+    <HeroContainer id="hero">
       <Container maxWidth="lg">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>

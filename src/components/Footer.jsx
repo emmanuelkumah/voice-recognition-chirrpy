@@ -4,39 +4,22 @@ import gitIcon from "../assets/images/gitIcon.png";
 
 const Footer = () => {
   return (
-    <Box >
+    <Box>
       <Container>
         <Grid container>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6}>
             <Logo />
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={4}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img
-              src={gitIcon}
-              alt="gitHub link"
-              style={{ width: "30px", height: "30px" }}
-            />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={4}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Typography variant="subTitle1" sx={{ fontSize: "16px" }}>
+
+          <Grid item xs={12} sm={6}>
+            <Typography
+              variant="subTitle1"
+              sx={{
+                display: "flex",
+                paddingTop: { xs: "none", sm: "20px" },
+                justifyContent: { xs: "flex-start", sm: "flex-end" },
+              }}
+            >
               © 2023 Chirrpy. All Rights Reserved.
             </Typography>
           </Grid>
