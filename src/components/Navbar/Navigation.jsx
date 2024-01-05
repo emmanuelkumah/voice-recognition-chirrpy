@@ -13,6 +13,9 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { theme } from "../../theme";
 import { navItems } from "../../componentData/data";
+import { HashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
+
 import Logo from "./Logo";
 
 const Navigation = () => {
@@ -58,8 +61,8 @@ const Navigation = () => {
 
             <StyledNavMenu>
               {navItems.map((item) => (
-                <MenuItem key={item}>
-                  <Typography variant="navItems">{item}</Typography>
+                <MenuItem>
+                  <Typography variant="navItems">{item.menu}</Typography>
                 </MenuItem>
               ))}
             </StyledNavMenu>
@@ -100,14 +103,14 @@ const Navigation = () => {
                   top: "60px",
                 }}
               >
-                {navItems.map((menu) => (
+                {navItems.map((item) => (
                   <MenuItem
-                    key={menu}
                     onClick={handleCloseNavMenu}
                     sx={{ width: "100vw" }}
+                    key={item.id}
                   >
                     <Typography textAlign="center" variant="navItems">
-                      {menu}
+                      {item.menu}
                     </Typography>
                   </MenuItem>
                 ))}

@@ -9,32 +9,32 @@ const Features = () => {
     paddingBottom: "2rem",
   }));
 
-  const StyledTypography = styled(Typography)(({ theme }) => ({
-    color: "#fff",
-    fontFamily: theme.typography.heading.fontFamily,
-    fontSize: theme.typography.subHeading.fontSize,
-    fontWeight: theme.typography.heading.fontWeight,
-    textAlign: "center",
-    paddingTop: "2rem",
-    paddingBottom: "1rem",
-  }));
-
-  const StyledDescription = styled(Typography)(({ theme }) => ({
-    color: "#fff",
-    display: "grid",
-    placeItems: "center",
-    paddingTop: "1rem",
-    paddingBottom: "1rem",
-  }));
-
   return (
     <>
-      <StyledSectionBackground>
+      <StyledSectionBackground id="features">
         <Container>
-          <StyledTypography variant="h3">Features</StyledTypography>
-          <StyledDescription variant="subTitle1">
+          <Typography
+            variant="h3"
+            sx={{
+              color: "#fff",
+              textAlign: "center",
+              paddingTop: "2rem",
+            }}
+          >
+            Features
+          </Typography>
+          <Typography
+            variant="subTitle1"
+            sx={{
+              color: "#fff",
+              display: "grid",
+              placeItems: "center",
+              paddingTop: "1rem",
+              paddingBottom: "1rem",
+            }}
+          >
             What is under the hood of our voice recognition service
-          </StyledDescription>
+          </Typography>
           <Grid container spacing={2}>
             {featuresData.map((item) => (
               <Grid item xs={12} sm={3}>

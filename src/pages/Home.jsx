@@ -15,13 +15,9 @@ const Home = () => {
       <Hero />
       <Reasons />
       <HowItWorks />
-
-      {/* <Hero />
-      <Reasons />
-      <HowItWorks />
       <UseCases />
       <Features />
-      <Footer /> */}
+      <Footer />
     </>
   );
 };

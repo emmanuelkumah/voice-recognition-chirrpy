@@ -28,7 +28,7 @@ const FeaturesCard = ({ item }) => {
       <StyledPaper>
         <Stack direction="row" spacing={2}>
           <StyledIcon src={item.imageUrl} alt={item.description} />
-          <StyledTypography variant="h3">{item.description}</StyledTypography>
+          <Typography variant="body1">{item.description}</Typography>
         </Stack>
       </StyledPaper>
     </>

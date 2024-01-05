@@ -88,7 +88,7 @@ const Reasons = () => {
   }));
 
   return (
-    <StyledBox>
+    <StyledBox id="reasons">
       <Container maxWidth="lg">
         <Box sx={{ color: "#fff", display: "grid", placeItems: "center" }}>
           <StyledHeading variant="h3">Why we built Chirrpy</StyledHeading>
