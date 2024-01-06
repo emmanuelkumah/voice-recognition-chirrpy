@@ -37,8 +37,8 @@ const Features = () => {
           </Typography>
           <Grid container spacing={2}>
             {featuresData.map((item) => (
-              <Grid item xs={12} sm={3}>
-                <FeaturesCard item={item} key={item.id} />
+              <Grid item xs={12} sm={3} key={item.id}>
+                <FeaturesCard item={item} />
               </Grid>
             ))}
           </Grid>

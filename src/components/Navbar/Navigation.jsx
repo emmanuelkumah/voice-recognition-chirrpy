@@ -61,7 +61,7 @@ const Navigation = () => {
 
             <StyledNavMenu>
               {navItems.map((item) => (
-                <MenuItem>
+                <MenuItem key={item.id}>
                   <Typography variant="navItems">{item.menu}</Typography>
                 </MenuItem>
               ))}
