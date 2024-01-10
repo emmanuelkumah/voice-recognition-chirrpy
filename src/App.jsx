@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Recorder } from "react-voice-recorder";
 import "react-voice-recorder/dist/index.css";
+import Status from "./components/Status";
+import Results from "./components/Results";
+import { Typography } from "@mui/material";
 
 const INITIAL_STATE = {
   url: null,
@@ -38,7 +41,7 @@ function App() {
             `/transcript/${transcript.id}`
           );
           //update transcript
-          console.log(transcriptData);
+          console.log("The data", transcriptData);
           setTranscript({ ...transcript, ...transcriptData });
         } catch (error) {
           console.log(error);
@@ -67,7 +70,6 @@ function App() {
       entity_detection: true,
       iab_categories: true,
     });
-    console.log(data.id);
     setTranscript({ id: data.id });
   };
   const handleReset = () => {
@@ -84,9 +86,12 @@ function App() {
         handleReset={handleReset}
       />
       <section>
-        {transcript.text && transcript.status === "completed"
-          ? transcript.text
-          : "Loading"}
+        {transcript.text && transcript.status === "completed" ? (
+          <Results transcript={transcript} />
+        ) : (
+          <div>{transcript.status}</div>
+          // <Status isLoading={isLoading} status={transcript.status} />
+        )}
       </section>
     </>
   );
