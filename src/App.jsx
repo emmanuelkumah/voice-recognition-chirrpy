@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Recorder } from "react-voice-recorder";
 import "react-voice-recorder/dist/index.css";
-import Status from "./components/Status";
-import Results from "./components/Results";
 import { Typography } from "@mui/material";
 
 const INITIAL_STATE = {
@@ -31,28 +29,7 @@ function App() {
     id: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-
-  //polling
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      if (transcript.id && transcript.status !== "completed" && isLoading) {
-        try {
-          const { data: transcriptData } = await assemblyAPI.get(
-            `/transcript/${transcript.id}`
-          );
-          //update transcript
-          console.log("The data", transcriptData);
-          setTranscript({ ...transcript, ...transcriptData });
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        setIsLoading(false);
-        clearInterval(interval);
-      }
-      return clearInterval(interval);
-    }, 1000);
-  }, [transcript, isLoading]);
+  const [transcriptError, setTranscriptError] = useState("");
 
   const handleAudioStop = (data) => {
     setAudioDetails(data);
@@ -71,10 +48,31 @@ function App() {
       iab_categories: true,
     });
     setTranscript({ id: data.id });
+    //poll data
+    checkStatusOfTranscription();
   };
   const handleReset = () => {
     setAudioDetails({ ...INITIAL_STATE });
     setTranscript({ id: "" });
+  };
+
+  const checkStatusOfTranscription = async () => {
+    while (true) {
+      const pollingResponse = await assemblyAPI.get(
+        `/transcript/${transcript.id}`
+      );
+      const transcriptionResult = pollingResponse.data;
+
+      if (transcriptionResult.status === "completed") {
+        console.log(transcriptionResult);
+        setTranscript({ ...transcript, ...transcriptionResult });
+        break;
+      } else if (transcriptionResult.status === "error") {
+        throw new Error(`Transcription failed: ${transcriptionResult.error}`);
+      } else {
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+      }
+    }
   };
   return (
     <>
@@ -85,11 +83,11 @@ function App() {
         handleAudioUpload={handleAudioUpload}
         handleReset={handleReset}
       />
-      <section>
-        {transcript.text && transcript.status === "completed"
-          ? transcript.text
-          : "loading.."}
-      </section>
+      <Typography variant="body1">
+        {transcript.status === "completed" && transcript.text}
+        {transcript.status === "error" &&
+          `Transcription failed: ${transcriptionResult.error}`}
+      </Typography>
     </>
   );
 }
