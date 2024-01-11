@@ -86,12 +86,9 @@ function App() {
         handleReset={handleReset}
       />
       <section>
-        {transcript.text && transcript.status === "completed" ? (
-          <Results transcript={transcript} />
-        ) : (
-          <div>{transcript.status}</div>
-          // <Status isLoading={isLoading} status={transcript.status} />
-        )}
+        {transcript.text && transcript.status === "completed"
+          ? transcript.text
+          : "loading.."}
       </section>
     </>
   );
