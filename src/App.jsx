@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { Recorder } from "react-voice-recorder";
-import "react-voice-recorder/dist/index.css";
+import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
+
+//import { Recorder } from "react-voice-recorder";
+//import "react-voice-recorder/dist/index.css";
 import { Typography } from "@mui/material";
 
 const INITIAL_STATE = {
@@ -31,10 +33,21 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [transcriptError, setTranscriptError] = useState("");
 
+  const recorderControls = useAudioRecorder();
+
+  const addAudioElement = (blob) => {
+    const url = URL.createObjectURL(blob);
+    const audio = document.createElement("audio");
+    audio.src = url;
+    audio.controls = true;
+    document.body.appendChild(audio);
+  };
+
   const handleAudioStop = (data) => {
     setAudioDetails(data);
   };
   const handleAudioUpload = async (audioFile) => {
+    console.log(audioFile);
     setIsLoading(true);
 
     const { data: uploadResponse } = await assemblyAPI.post(
@@ -74,15 +87,28 @@ function App() {
       }
     }
   };
+  //upload recoding
+  const uploadRecording = (blob) => {
+    console.log(blob);
+  };
   return (
     <>
-      <Recorder
+      {/* <Recorder
         recorder={true}
         audioURL={audioDetails.url}
         handleAudioStop={handleAudioStop}
         handleAudioUpload={handleAudioUpload}
         handleReset={handleReset}
+      /> */}
+      <AudioRecorder
+        onRecordingComplete={(blob) => addAudioElement(blob)}
+        recorderControls={recorderControls}
+        showVisualizer={true}
       />
+      <button onClick={recorderControls.stopRecording}>Stop recording</button>
+      <button onClick={() => handleAudioUpload(recorderControls.recordingBlob)}>
+        Upload recording
+      </button>
       <Typography variant="body1">
         {transcript.status === "completed" && transcript.text}
         {transcript.status === "error" &&
