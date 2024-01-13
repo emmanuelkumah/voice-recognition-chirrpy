@@ -2,9 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 
-//import { Recorder } from "react-voice-recorder";
-//import "react-voice-recorder/dist/index.css";
 import { Typography } from "@mui/material";
+import EmbedAudio from "./components/EmbedAudio";
 
 const INITIAL_STATE = {
   url: null,
@@ -26,28 +25,39 @@ const assemblyAPI = axios.create({
   },
 });
 function App() {
-  const [audioDetails, setAudioDetails] = useState(INITIAL_STATE);
   const [transcript, setTranscript] = useState({
     id: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [transcriptError, setTranscriptError] = useState("");
 
+  //new states
+  const [audioDetails, setAudioDetails] = useState({
+    blob: "",
+    url: "",
+    hasBlob: false,
+  });
+
   const recorderControls = useAudioRecorder();
 
-  const addAudioElement = (blob) => {
-    const url = URL.createObjectURL(blob);
-    const audio = document.createElement("audio");
-    audio.src = url;
-    audio.controls = true;
-    document.body.appendChild(audio);
-  };
+  // const addAudioElement = (blob) => {
+  //   const url = URL.createObjectURL(blob);
+  //   const audio = document.createElement("audio");
+  //   audio.src = url;
+  //   audio.controls = true;
+  //   const audioElement = document.getElementById("audio");
+  //   audioElement.appendChild(audio);
+  // };
 
+  //audio embed
+  const displayAudioElement = (blob) => {
+    const url = URL.createObjectURL(blob);
+    setAudioDetails({ ...audioDetails, url: url, hasBlob: true });
+  };
   const handleAudioStop = (data) => {
     setAudioDetails(data);
   };
   const handleAudioUpload = async (audioFile) => {
-    console.log(audioFile);
     setIsLoading(true);
 
     const { data: uploadResponse } = await assemblyAPI.post(
@@ -87,28 +97,28 @@ function App() {
       }
     }
   };
-  //upload recoding
-  const uploadRecording = (blob) => {
-    console.log(blob);
+  const handleStopRecording = (stop) => {
+    stop;
+    console.log("stopping");
+    // recorderControls.stopRecording;
   };
   return (
     <>
-      {/* <Recorder
-        recorder={true}
-        audioURL={audioDetails.url}
-        handleAudioStop={handleAudioStop}
-        handleAudioUpload={handleAudioUpload}
-        handleReset={handleReset}
-      /> */}
       <AudioRecorder
-        onRecordingComplete={(blob) => addAudioElement(blob)}
+        onRecordingComplete={(blob) => displayAudioElement(blob)}
         recorderControls={recorderControls}
         showVisualizer={true}
       />
+      <button onClick={recorderControls.startRecording}>Start recording</button>
+
       <button onClick={recorderControls.stopRecording}>Stop recording</button>
-      <button onClick={() => handleAudioUpload(recorderControls.recordingBlob)}>
+      <button
+        disabled={!audioDetails.hasBlob}
+        onClick={() => handleAudioUpload(recorderControls.recordingBlob)}
+      >
         Upload recording
       </button>
+      {audioDetails.hasBlob && <EmbedAudio audioDetails={audioDetails} />}
       <Typography variant="body1">
         {transcript.status === "completed" && transcript.text}
         {transcript.status === "error" &&
