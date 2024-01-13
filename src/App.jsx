@@ -4,18 +4,8 @@ import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 
 import { Typography } from "@mui/material";
 import EmbedAudio from "./components/EmbedAudio";
-
-const INITIAL_STATE = {
-  url: null,
-  blob: null,
-  chunks: null,
-  duration: {
-    h: 0,
-    m: 0,
-    s: 0,
-  },
-};
-//create baseURL
+import TranscriptSuccess from "./components/TranscriptSuccess";
+import TranscriptError from "./components/TranscriptError";
 
 const assemblyAPI = axios.create({
   baseURL: "https://api.assemblyai.com/v2",
@@ -39,15 +29,6 @@ function App() {
   });
 
   const recorderControls = useAudioRecorder();
-
-  // const addAudioElement = (blob) => {
-  //   const url = URL.createObjectURL(blob);
-  //   const audio = document.createElement("audio");
-  //   audio.src = url;
-  //   audio.controls = true;
-  //   const audioElement = document.getElementById("audio");
-  //   audioElement.appendChild(audio);
-  // };
 
   //audio embed
   const displayAudioElement = (blob) => {
@@ -79,6 +60,7 @@ function App() {
     setTranscript({ id: "" });
   };
 
+  //check status of transcription
   const checkStatusOfTranscription = async () => {
     while (true) {
       const pollingResponse = await assemblyAPI.get(
@@ -97,11 +79,7 @@ function App() {
       }
     }
   };
-  const handleStopRecording = (stop) => {
-    stop;
-    console.log("stopping");
-    // recorderControls.stopRecording;
-  };
+
   return (
     <>
       <AudioRecorder
@@ -119,11 +97,20 @@ function App() {
         Upload recording
       </button>
       {audioDetails.hasBlob && <EmbedAudio audioDetails={audioDetails} />}
-      <Typography variant="body1">
+      {transcript.status === "completed" ? (
+        <TranscriptSuccess transcript={transcript} />
+      ) : transcript.error ? (
+        <TranscriptError transcript={transcript} />
+      ) : isLoading ? (
+        "Loading"
+      ) : (
+        "Transcribe voice"
+      )}
+      {/* <Typography variant="body1">
         {transcript.status === "completed" && transcript.text}
         {transcript.status === "error" &&
           `Transcription failed: ${transcriptionResult.error}`}
-      </Typography>
+      </Typography> */}
     </>
   );
 }
