@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import EmbedAudio from "./components/EmbedAudio";
 import TranscriptSuccess from "./components/TranscriptSuccess";
 import TranscriptError from "./components/TranscriptError";
@@ -14,23 +14,24 @@ const assemblyAPI = axios.create({
     "content-Type": "application/json",
   },
 });
-function App() {
+
+const INITIAL_STATE = {
+  blob: "",
+  url: "",
+  hasBlob: false,
+};
+const App = () => {
   const [transcript, setTranscript] = useState({
     id: "",
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [transcriptError, setTranscriptError] = useState("");
 
   //new states
-  const [audioDetails, setAudioDetails] = useState({
-    blob: "",
-    url: "",
-    hasBlob: false,
-  });
+  const [audioDetails, setAudioDetails] = useState(INITIAL_STATE);
 
   const recorderControls = useAudioRecorder();
 
-  //audio embed
   const displayAudioElement = (blob) => {
     const url = URL.createObjectURL(blob);
     setAudioDetails({ ...audioDetails, url: url, hasBlob: true });
@@ -38,8 +39,9 @@ function App() {
   const handleAudioStop = (data) => {
     setAudioDetails(data);
   };
+
   const handleAudioUpload = async (audioFile) => {
-    setIsLoading(true);
+    setIsProcessing(true);
 
     const { data: uploadResponse } = await assemblyAPI.post(
       "/upload",
@@ -51,16 +53,22 @@ function App() {
       entity_detection: true,
       iab_categories: true,
     });
-    setTranscript({ id: data.id });
+    if (data.id) {
+      setTranscript({ id: data.id });
+      setIsProcessing(false);
+
+      checkStatusOfTranscription();
+    } else {
+      console.log("try again");
+    }
     //poll data
-    checkStatusOfTranscription();
   };
+
   const handleReset = () => {
     setAudioDetails({ ...INITIAL_STATE });
     setTranscript({ id: "" });
   };
 
-  //check status of transcription
   const checkStatusOfTranscription = async () => {
     while (true) {
       const pollingResponse = await assemblyAPI.get(
@@ -90,29 +98,28 @@ function App() {
       <button onClick={recorderControls.startRecording}>Start recording</button>
 
       <button onClick={recorderControls.stopRecording}>Stop recording</button>
-      <button
-        disabled={!audioDetails.hasBlob}
-        onClick={() => handleAudioUpload(recorderControls.recordingBlob)}
-      >
-        Upload recording
-      </button>
-      {audioDetails.hasBlob && <EmbedAudio audioDetails={audioDetails} />}
+
+      {audioDetails.hasBlob && (
+        <Box>
+          <EmbedAudio audioDetails={audioDetails} />
+
+          <button
+            onClick={() => handleAudioUpload(recorderControls.recordingBlob)}
+          >
+            Transcribe recording
+          </button>
+          <button onClick={handleReset}>Reset </button>
+        </Box>
+      )}
+      {isProcessing && "Processing...."}
+
       {transcript.status === "completed" ? (
         <TranscriptSuccess transcript={transcript} />
-      ) : transcript.error ? (
-        <TranscriptError transcript={transcript} />
-      ) : isLoading ? (
-        "Loading"
       ) : (
-        "Transcribe voice"
+        <TranscriptError transcript={transcript} />
       )}
-      {/* <Typography variant="body1">
-        {transcript.status === "completed" && transcript.text}
-        {transcript.status === "error" &&
-          `Transcription failed: ${transcriptionResult.error}`}
-      </Typography> */}
     </>
   );
-}
+};
 
 export default App;
