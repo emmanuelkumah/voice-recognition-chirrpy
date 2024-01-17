@@ -1,7 +1,7 @@
 import { Typography, Box, styled } from "@mui/material";
-import { theme } from "../theme";
+import { theme } from "../../theme";
 import React, { useState } from "react";
-import Sentiment from "./Sentiment";
+import Sentiment from "../SentimentAnalysis/Sentiment";
 
 const TranscriptSuccess = ({ transcript }) => {
   const [hasSentiment, setHasSentiment] = useState(false);

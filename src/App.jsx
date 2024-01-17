@@ -4,8 +4,8 @@ import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 
 import { Box, Typography } from "@mui/material";
 import EmbedAudio from "./components/EmbedAudio";
-import TranscriptSuccess from "./components/TranscriptSuccess";
-import TranscriptError from "./components/TranscriptError";
+import TranscriptSuccess from "./components/Transcript/TranscriptSuccess";
+import TranscriptError from "./components/Transcript/TranscriptError";
 
 const assemblyAPI = axios.create({
   baseURL: "https://api.assemblyai.com/v2",
