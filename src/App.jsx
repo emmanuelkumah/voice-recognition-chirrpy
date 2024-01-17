@@ -52,6 +52,9 @@ const App = () => {
       sentiment_analysis: true,
       entity_detection: true,
       iab_categories: true,
+      summarization: true,
+      summary_model: "informative",
+      summary_type: "paragraph",
     });
     if (data.id) {
       setTranscript({ id: data.id });

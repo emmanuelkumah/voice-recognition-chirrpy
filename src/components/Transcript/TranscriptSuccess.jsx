@@ -2,13 +2,14 @@ import { Typography, Box, styled } from "@mui/material";
 import { theme } from "../../theme";
 import React, { useState } from "react";
 import Sentiment from "../SentimentAnalysis/Sentiment";
+import SummarizeTranscript from "../Summarization/SummarizeTranscript";
 
 const TranscriptSuccess = ({ transcript }) => {
-  const [hasSentiment, setHasSentiment] = useState(false);
+  const [status, setStatus] = useState({
+    hasSentiment: false,
+    hasSummary: false,
+  });
 
-  const handleShowSentiment = () => {
-    setHasSentiment(true);
-  };
   const StyledBox = styled(Box)(({ theme }) => ({
     background: theme.palette.secondary.main,
     height: "auto",
@@ -19,11 +20,19 @@ const TranscriptSuccess = ({ transcript }) => {
         <Typography variant="body1">{transcript.text}</Typography>
       </StyledBox>
       <Box>
-        <button onClick={handleShowSentiment}>Show Sentiments</button>
-        {hasSentiment && (
+        <button onClick={() => setStatus({ ...status, hasSentiment: true })}>
+          Show Sentiments
+        </button>
+        {status.hasSentiment && (
           <Sentiment
             sentimentAnalysis={transcript.sentiment_analysis_results}
           />
+        )}
+        <button onClick={() => setStatus({ ...status, hasSummary: true })}>
+          Summarize
+        </button>
+        {status.hasSummary && (
+          <SummarizeTranscript summary={transcript.summary} />
         )}
       </Box>
     </>
