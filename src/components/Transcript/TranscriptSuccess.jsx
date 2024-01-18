@@ -3,17 +3,20 @@ import { theme } from "../../theme";
 import React, { useState } from "react";
 import Sentiment from "../SentimentAnalysis/Sentiment";
 import SummarizeTranscript from "../Summarization/SummarizeTranscript";
+import TopicDetection from "../TopicDetection/TopicDetection";
 
 const TranscriptSuccess = ({ transcript }) => {
   const [status, setStatus] = useState({
     hasSentiment: false,
     hasSummary: false,
+    hasDetectedTopic: false,
   });
 
   const StyledBox = styled(Box)(({ theme }) => ({
     background: theme.palette.secondary.main,
     height: "auto",
   }));
+
   return (
     <>
       <StyledBox>
@@ -34,6 +37,12 @@ const TranscriptSuccess = ({ transcript }) => {
         {status.hasSummary && (
           <SummarizeTranscript summary={transcript.summary} />
         )}
+        <button
+          onClick={() => setStatus({ ...status, hasDetectedTopic: true })}
+        >
+          Detect Topic
+        </button>
+        {status.hasDetectedTopic && <TopicDetection transcript={transcript} />}
       </Box>
     </>
   );

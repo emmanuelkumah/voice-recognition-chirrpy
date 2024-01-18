@@ -4,6 +4,7 @@ import Highlighted from "./Highlighted";
 const Sentiment = ({ sentimentAnalysis }) => {
   return (
     <div>
+      <h2>Sentiment Analysis</h2>
       {sentimentAnalysis.map((result) => (
         <Highlighted
           key={result.text}
