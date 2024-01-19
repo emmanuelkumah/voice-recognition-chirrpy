@@ -1,7 +1,7 @@
 import { Typography, Box, Container, Grid, styled } from "@mui/material";
-import { theme } from "../../theme";
-import FeaturesCard from "../UI/FeaturesCard";
-import { featuresData } from "../../componentData/data";
+import { theme } from "../../../theme";
+import FeaturesCard from "../../UI/FeaturesCard";
+import { featuresData } from "../../../componentData/data";
 
 const Features = () => {
   const StyledSectionBackground = styled(Box)(({ theme }) => ({

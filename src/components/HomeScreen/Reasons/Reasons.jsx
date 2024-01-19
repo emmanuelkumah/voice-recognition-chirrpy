@@ -9,12 +9,12 @@ import {
   CardMedia,
 } from "@mui/material";
 
-import { theme } from "../../theme";
-import vrImage from "../../assets/images/boyWithPhone.jpeg";
-import bigEllipse from "../../assets/images/ellipse.png";
-import blurYellow from "../../assets/images/blurYellow.png";
-import ReasonCard from "../UI/ReasonCard";
-import { reasonsData } from "../../componentData/data";
+import { theme } from "../../../theme";
+import vrImage from "../../../assets/images/boyWithPhone.jpeg";
+import bigEllipse from "../../../assets/images/ellipse.png";
+import blurYellow from "../../../assets/images/blurYellow.png";
+import ReasonCard from "../../UI/ReasonCard";
+import { reasonsData } from "../../../componentData/data";
 
 const Reasons = () => {
   const StyledBox = styled(Box)(({ theme }) => ({

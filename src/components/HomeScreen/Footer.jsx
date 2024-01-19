@@ -1,6 +1,5 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import Logo from "./Navbar/Logo";
-import gitIcon from "../assets/images/gitIcon.png";
 
 const Footer = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Box, styled, Container, Grid, Paper } from "@mui/material";
-import { theme } from "../../theme";
-import { howItWorksData } from "../../componentData/data";
+import { theme } from "../../../theme";
+import { howItWorksData } from "../../../componentData/data";
 
 const HowItWorks = () => {
   const commonTypographyStyles = {

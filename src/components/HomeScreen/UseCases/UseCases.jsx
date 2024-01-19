@@ -1,10 +1,10 @@
 import { Typography, Box, styled, Container, Stack } from "@mui/material";
 import React from "react";
-import { theme } from "../../theme";
+import { theme } from "../../../theme";
 import UseBrands from "./UseBrands";
-import { useCasesData } from "../../componentData/data";
+import { useCasesData } from "../../../componentData/data";
 
-import UseCaseCard from "../UI/UseCaseCard";
+import UseCaseCard from "../../UI/UseCaseCard";
 
 const UseCases = () => {
   const StyledSectionBackground = styled(Box)(({ theme }) => ({

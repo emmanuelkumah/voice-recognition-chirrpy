@@ -1,6 +1,6 @@
 import { Box, Typography, styled, Stack, Grid } from "@mui/material";
-import { theme } from "../../theme";
-import { logos } from "../../componentData/data";
+import { theme } from "../../../theme";
+import { logos } from "../../../componentData/data";
 
 const UseBrands = () => {
   const StyledSectionBackground = styled(Box)(({ theme }) => ({

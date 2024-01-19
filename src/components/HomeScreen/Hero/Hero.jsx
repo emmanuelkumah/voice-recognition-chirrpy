@@ -7,10 +7,10 @@ import {
   styled,
 } from "@mui/material";
 import React from "react";
-import { theme } from "../../theme";
-import Btn from "../UI/Button";
-import heroImage from "../../assets/images/heroImg.png";
-import heroBlur from "../../assets/images/heroBlur.png";
+import { theme } from "../../../theme";
+import Btn from "../../UI/Button";
+import heroImage from "../../../assets/images/heroImg.png";
+import heroBlur from "../../../assets/images/heroBlur.png";
 
 const Hero = () => {
   const HeroContainer = styled(Box)(({ theme }) => ({

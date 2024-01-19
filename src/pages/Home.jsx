@@ -1,12 +1,11 @@
 import React from "react";
-import Navigation from "../components/Navbar/Navigation";
-import Hero from "../components/Hero/Hero";
-
-import Reasons from "../components/Reasons/Reasons";
-import HowItWorks from "../components/HowItWorks/HowItWorks";
-import UseCases from "../components/UseCases/UseCases";
-import Features from "../components/Features/Features";
-import Footer from "../components/Footer";
+import Navigation from "../components/HomeScreen/Navbar/Navigation";
+import Hero from "../components/HomeScreen/Hero/Hero";
+import Reasons from "../components/HomeScreen/Reasons/Reasons";
+import HowItWorks from "../components/HomeScreen/HowItWorks/HowItWorks";
+import UseCases from "../components/HomeScreen/UseCases/UseCases";
+import Features from "../components/HomeScreen/Features/Features";
+import Footer from "../components/HomeScreen/Footer";
 
 const Home = () => {
   return (
@@ -18,6 +17,8 @@ const Home = () => {
       <UseCases />
       <Features />
       <Footer />
+
+     
     </>
   );
 };

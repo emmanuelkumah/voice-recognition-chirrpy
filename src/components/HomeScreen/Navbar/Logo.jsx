@@ -1,5 +1,5 @@
 import { Box, styled } from "@mui/material";
-import chirrpyLogo from "../../assets/images/chirrpyLogo.png";
+import chirrpyLogo from "../../../assets/images/chirrpyLogo.png";
 
 const Logo = () => {
   const StyledLogo = styled("img")(() => ({

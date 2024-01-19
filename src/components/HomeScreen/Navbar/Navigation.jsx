@@ -11,8 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { theme } from "../../theme";
-import { navItems } from "../../componentData/data";
+import { theme } from "../../../theme";
+import { navItems } from "../../../componentData/data";
 import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 
