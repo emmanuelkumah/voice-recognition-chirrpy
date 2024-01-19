@@ -2,8 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 import "./audio-recorder.css";
-
-import { Box, Typography, styled } from "@mui/material";
+import Logo from "./components/HomeScreen/Navbar/Logo";
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Typography,
+  styled,
+} from "@mui/material";
 import EmbedAudio from "./components/EmbedAudio";
 import TranscriptSuccess from "./components/Transcript/TranscriptSuccess";
 import TranscriptError from "./components/Transcript/TranscriptError";
@@ -37,6 +44,13 @@ const App = () => {
   const customClasses = {
     container: "audio-recorder",
   };
+  const StyledBoxContainer = styled(Box)(({ theme }) => ({
+    width: "90%",
+    [theme.breakpoints.up("sm")]: {
+      width: "50%",
+      border: "1px solid red",
+    },
+  }));
 
   const displayAudioElement = (blob) => {
     const url = URL.createObjectURL(blob);
@@ -99,39 +113,140 @@ const App = () => {
 
   return (
     <>
-      <AudioRecorder
-        onRecordingComplete={(blob) => displayAudioElement(blob)}
-        recorderControls={recorderControls}
-        showVisualizer={true}
-        classes={{
-          AudioRecorderStartSaveClass: "audio-recorder-svg-color",
-          AudioRecorderPauseResumeClass: "audio-recorder-svg-color",
-          AudioRecorderDiscardClass: "audio-recorder-svg-color",
-        }}
-      />
-      <button onClick={recorderControls.startRecording}>Start recording</button>
+      <Box sx={{ backgroundColor: "#FDF0D5", height: "100vh" }}>
+        <Container maxWidth="lg">
+          <Logo />
+          <section>
+            <Typography
+              variant="h4"
+              sx={{ paddingTop: "30px", paddingBottom: "30px" }}
+            >
+              Howdy!, let's trancribe your speech into accurate text using our
+              AI
+            </Typography>
 
-      <button onClick={recorderControls.stopRecording}>Stop recording</button>
+            <AudioRecorder
+              onRecordingComplete={(blob) => displayAudioElement(blob)}
+              recorderControls={recorderControls}
+              showVisualizer={true}
+              classes={{
+                AudioRecorderStartSaveClass: "audio-recorder-svg-color",
+                AudioRecorderPauseResumeClass: "audio-recorder-svg-color",
+                AudioRecorderDiscardClass: "audio-recorder-svg-color",
+                AudioRecorderClass: "audio-container",
+              }}
+            />
+            <Typography
+              variant="body1"
+              sx={{ fontSize: "15px", marginTop: "20px" }}
+            >
+              To start, click on the "start recording" button or the microphone
+              icon
+            </Typography>
+            <Stack direction="row" spacing={3} sx={{ marginTop: "20px" }}>
+              <Button
+                variant="contained"
+                disableElevation
+                size="small"
+                onClick={recorderControls.startRecording}
+                sx={{
+                  borderRadius: "20px",
+                  textTransform: "capitalize",
+                  fontFamily: "Poppins",
+                  padding: "5px 15px",
+                  "&:hover": {
+                    backgroundColor: "#1C7C54",
+                  },
+                  "&:focus": {
+                    backgroundColor: "#1C7C54",
+                  },
+                }}
+              >
+                Start recording
+              </Button>
 
-      {audioDetails.hasBlob && (
-        <Box>
-          <EmbedAudio audioDetails={audioDetails} />
+              <Button
+                variant="outlined"
+                size="small"
+                onClick={recorderControls.stopRecording}
+                sx={{
+                  borderRadius: "20px",
+                  textTransform: "capitalize",
+                  fontFamily: "Poppins",
+                  padding: "5px 15px",
+                  "&:hover": {
+                    backgroundColor: "#DB162F",
+                    color: "#fff",
+                  },
+                  "&:focus": {
+                    backgroundColor: "#DB162F",
+                    color: "#fff",
+                  },
+                }}
+              >
+                Stop recording
+              </Button>
+            </Stack>
 
-          <button
-            onClick={() => handleAudioUpload(recorderControls.recordingBlob)}
-          >
-            Transcribe recording
-          </button>
-          <button onClick={handleReset}>Reset </button>
-        </Box>
-      )}
-      {isProcessing && "Processing...."}
+            {audioDetails.hasBlob && (
+              <Box sx={{ marginTop: "20px" }}>
+                <EmbedAudio audioDetails={audioDetails} />
+                <Stack direction="row" spacing={3} sx={{ marginTop: "20px" }}>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      borderRadius: "20px",
+                      textTransform: "capitalize",
+                      fontFamily: "Poppins",
+                      padding: "5px 15px",
+                      "&:hover": {
+                        backgroundColor: "#1C7C54",
+                        color: "#fff",
+                      },
+                      "&:focus": {
+                        backgroundColor: "#1C7C54",
+                        color: "#fff",
+                      },
+                    }}
+                    onClick={() =>
+                      handleAudioUpload(recorderControls.recordingBlob)
+                    }
+                  >
+                    Transcribe speech
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      borderRadius: "20px",
+                      textTransform: "capitalize",
+                      fontFamily: "Poppins",
+                      padding: "5px 10px",
+                      "&:hover": {
+                        backgroundColor: "#DB162F",
+                        color: "#fff",
+                      },
+                      "&:focus": {
+                        backgroundColor: "#DB162F",
+                        color: "#fff",
+                      },
+                    }}
+                    onClick={handleReset}
+                  >
+                    Reset speech
+                  </Button>
+                </Stack>
+              </Box>
+            )}
+            {isProcessing && "Processing...."}
 
-      {transcript.status === "completed" ? (
-        <TranscriptSuccess transcript={transcript} />
-      ) : (
-        <TranscriptError transcript={transcript} />
-      )}
+            {transcript.status === "completed" ? (
+              <TranscriptSuccess transcript={transcript} />
+            ) : (
+              <TranscriptError transcript={transcript} />
+            )}
+          </section>
+        </Container>
+      </Box>
     </>
   );
 };

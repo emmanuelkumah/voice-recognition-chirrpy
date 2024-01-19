@@ -1,3 +1,7 @@
+.audio-container {
+  /* width: 50% !important;
+  height: 20% !important; */
+}
 .audio-recorder-svg-color {
   filter: invert(62%) sepia(51%) saturate(1931%) hue-rotate(12deg)
     brightness(111%) contrast(105%);
@@ -17,5 +21,12 @@
 .recording {
   border-radius: 20px !important;
   width: 300px;
+  height: 70px;
   transition: all 0.2s ease-out;
+}
+.audio-recorder-timer,
+.audio-recorder-status {
+  color: #fff !important;
+
+  font-family: "Poppins";
 }

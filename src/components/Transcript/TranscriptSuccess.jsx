@@ -1,4 +1,4 @@
-import { Typography, Box, styled } from "@mui/material";
+import { Typography, Box, styled, Button, Stack } from "@mui/material";
 import { theme } from "../../theme";
 import React, { useState } from "react";
 import Sentiment from "../SentimentAnalysis/Sentiment";
@@ -13,8 +13,11 @@ const TranscriptSuccess = ({ transcript }) => {
   });
 
   const StyledBox = styled(Box)(({ theme }) => ({
-    background: theme.palette.secondary.main,
+    background: "#fff",
+    marginTop: "30px",
+    padding: "20px",
     height: "auto",
+    borderRadius: "10px",
   }));
 
   return (
@@ -22,28 +25,77 @@ const TranscriptSuccess = ({ transcript }) => {
       <StyledBox>
         <Typography variant="body1">{transcript.text}</Typography>
       </StyledBox>
-      <Box>
-        <button onClick={() => setStatus({ ...status, hasSentiment: true })}>
+      <Stack direction="row" spacing={2} sx={{ marginTop: "20px" }}>
+        <Button
+          variant="contained"
+          sx={{
+            borderRadius: "20px",
+            textTransform: "capitalize",
+            fontFamily: "Poppins",
+            padding: "5px 15px",
+            "&:hover": {
+              backgroundColor: "#1C7C54",
+              color: "#fff",
+            },
+            "&:focus": {
+              backgroundColor: "#1C7C54",
+              color: "#fff",
+            },
+          }}
+          onClick={() => setStatus({ ...status, hasSentiment: true })}
+        >
           Show Sentiments
-        </button>
+        </Button>
         {status.hasSentiment && (
           <Sentiment
             sentimentAnalysis={transcript.sentiment_analysis_results}
           />
         )}
-        <button onClick={() => setStatus({ ...status, hasSummary: true })}>
+        <Button
+          variant="contained"
+          sx={{
+            borderRadius: "20px",
+            textTransform: "capitalize",
+            fontFamily: "Poppins",
+            padding: "5px 15px",
+            "&:hover": {
+              backgroundColor: "#1C7C54",
+              color: "#fff",
+            },
+            "&:focus": {
+              backgroundColor: "#1C7C54",
+              color: "#fff",
+            },
+          }}
+          onClick={() => setStatus({ ...status, hasSummary: true })}
+        >
           Summarize
-        </button>
+        </Button>
         {status.hasSummary && (
           <SummarizeTranscript summary={transcript.summary} />
         )}
-        <button
+        <Button
+          variant="contained"
+          sx={{
+            borderRadius: "20px",
+            textTransform: "capitalize",
+            fontFamily: "Poppins",
+            padding: "5px 15px",
+            "&:hover": {
+              backgroundColor: "#1C7C54",
+              color: "#fff",
+            },
+            "&:focus": {
+              backgroundColor: "#1C7C54",
+              color: "#fff",
+            },
+          }}
           onClick={() => setStatus({ ...status, hasDetectedTopic: true })}
         >
           Detect Topic
-        </button>
+        </Button>
         {status.hasDetectedTopic && <TopicDetection transcript={transcript} />}
-      </Box>
+      </Stack>
     </>
   );
 };
