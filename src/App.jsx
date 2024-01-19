@@ -1,8 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
+import "./audio-recorder.css";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import EmbedAudio from "./components/EmbedAudio";
 import TranscriptSuccess from "./components/Transcript/TranscriptSuccess";
 import TranscriptError from "./components/Transcript/TranscriptError";
@@ -31,6 +32,11 @@ const App = () => {
   const [audioDetails, setAudioDetails] = useState(INITIAL_STATE);
 
   const recorderControls = useAudioRecorder();
+
+  //styling
+  const customClasses = {
+    container: "audio-recorder",
+  };
 
   const displayAudioElement = (blob) => {
     const url = URL.createObjectURL(blob);
@@ -97,6 +103,11 @@ const App = () => {
         onRecordingComplete={(blob) => displayAudioElement(blob)}
         recorderControls={recorderControls}
         showVisualizer={true}
+        classes={{
+          AudioRecorderStartSaveClass: "audio-recorder-svg-color",
+          AudioRecorderPauseResumeClass: "audio-recorder-svg-color",
+          AudioRecorderDiscardClass: "audio-recorder-svg-color",
+        }}
       />
       <button onClick={recorderControls.startRecording}>Start recording</button>
 
