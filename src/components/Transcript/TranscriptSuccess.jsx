@@ -34,11 +34,11 @@ const TranscriptSuccess = ({ transcript }) => {
             fontFamily: "Poppins",
             padding: "5px 15px",
             "&:hover": {
-              backgroundColor: "#1C7C54",
+              backgroundColor: "#321325",
               color: "#fff",
             },
             "&:focus": {
-              backgroundColor: "#1C7C54",
+              backgroundColor: "#321325",
               color: "#fff",
             },
           }}
@@ -59,11 +59,11 @@ const TranscriptSuccess = ({ transcript }) => {
             fontFamily: "Poppins",
             padding: "5px 15px",
             "&:hover": {
-              backgroundColor: "#1C7C54",
+              backgroundColor: "#321325",
               color: "#fff",
             },
             "&:focus": {
-              backgroundColor: "#1C7C54",
+              backgroundColor: "#321325",
               color: "#fff",
             },
           }}
@@ -82,11 +82,11 @@ const TranscriptSuccess = ({ transcript }) => {
             fontFamily: "Poppins",
             padding: "5px 15px",
             "&:hover": {
-              backgroundColor: "#1C7C54",
+              backgroundColor: "#321325",
               color: "#fff",
             },
             "&:focus": {
-              backgroundColor: "#1C7C54",
+              backgroundColor: "#321325",
               color: "#fff",
             },
           }}
@@ -95,6 +95,25 @@ const TranscriptSuccess = ({ transcript }) => {
           Detect Topic
         </Button>
         {status.hasDetectedTopic && <TopicDetection transcript={transcript} />}
+        <Button
+          variant="contained"
+          sx={{
+            borderRadius: "20px",
+            textTransform: "capitalize",
+            fontFamily: "Poppins",
+            padding: "5px 15px",
+            "&:hover": {
+              backgroundColor: "#321325",
+              color: "#fff",
+            },
+            "&:focus": {
+              backgroundColor: "#321325",
+              color: "#fff",
+            },
+          }}
+        >
+          Download File
+        </Button>
       </Stack>
     </>
   );
