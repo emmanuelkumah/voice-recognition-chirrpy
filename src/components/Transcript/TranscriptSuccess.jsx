@@ -1,6 +1,8 @@
 import { Typography, Box, styled, Button, Stack } from "@mui/material";
+import html2PDF from "jspdf-html2canvas";
+
 import { theme } from "../../theme";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Sentiment from "../SentimentAnalysis/Sentiment";
 import SummarizeTranscript from "../Summarization/SummarizeTranscript";
 import TopicDetection from "../TopicDetection/TopicDetection";
@@ -12,6 +14,7 @@ const TranscriptSuccess = ({ transcript }) => {
     hasDetectedTopic: false,
   });
 
+  const transcribeRef = useRef(null);
   const StyledBox = styled(Box)(({ theme }) => ({
     background: "#fff",
     marginTop: "30px",
@@ -20,9 +23,19 @@ const TranscriptSuccess = ({ transcript }) => {
     borderRadius: "10px",
   }));
 
+  const handleTranscribeDownload = async () => {
+    const pdf = await html2PDF(transcribeRef.current, {
+      jsPDF: {
+        format: "a4",
+      },
+      imageType: "image/jpeg",
+      output: "./pdf/generate.pdf",
+    });
+  };
+
   return (
     <>
-      <StyledBox>
+      <StyledBox ref={transcribeRef}>
         <Typography variant="body1">{transcript.text}</Typography>
       </StyledBox>
       <Stack direction="row" spacing={2} sx={{ marginTop: "20px" }}>
@@ -95,26 +108,9 @@ const TranscriptSuccess = ({ transcript }) => {
           Detect Topic
         </Button>
         {status.hasDetectedTopic && <TopicDetection transcript={transcript} />}
-        <Button
-          variant="contained"
-          sx={{
-            borderRadius: "20px",
-            textTransform: "capitalize",
-            fontFamily: "Poppins",
-            padding: "5px 15px",
-            "&:hover": {
-              backgroundColor: "#321325",
-              color: "#fff",
-            },
-            "&:focus": {
-              backgroundColor: "#321325",
-              color: "#fff",
-            },
-          }}
-        >
-          Download File
-        </Button>
       </Stack>
+
+      <button onClick={handleTranscribeDownload}>Download</button>
     </>
   );
 };
