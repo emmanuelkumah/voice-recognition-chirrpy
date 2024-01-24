@@ -8,7 +8,7 @@ const EmbedAudio = ({ audioDetails }) => {
         variant="body1"
         sx={{ color: "#3C153B", marginBottom: "20px" }}
       >
-        Listen to the recorded audio
+        Listen to the recorded speech
       </Typography>
       <audio controls src={audioDetails.url}></audio>
     </>

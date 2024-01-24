@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 import axios from "axios";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 import "./audio-recorder.css";
@@ -14,6 +15,7 @@ import {
 import EmbedAudio from "./components/EmbedAudio";
 import TranscriptSuccess from "./components/Transcript/TranscriptSuccess";
 import TranscriptError from "./components/Transcript/TranscriptError";
+import { yellow } from "@mui/material/colors";
 
 const assemblyAPI = axios.create({
   baseURL: "https://api.assemblyai.com/v2",
@@ -30,7 +32,7 @@ const INITIAL_STATE = {
 };
 const App = () => {
   const [transcript, setTranscript] = useState({
-    id: "",
+    // id: "",
   });
   const [isProcessing, setIsProcessing] = useState(false);
   const [transcriptError, setTranscriptError] = useState("");
@@ -61,8 +63,6 @@ const App = () => {
   };
 
   const handleAudioUpload = async (audioFile) => {
-    setIsProcessing(true);
-
     const { data: uploadResponse } = await assemblyAPI.post(
       "/upload",
       audioFile
@@ -76,15 +76,7 @@ const App = () => {
       summary_model: "informative",
       summary_type: "paragraph",
     });
-    if (data.id) {
-      setTranscript({ id: data.id });
-      setIsProcessing(false);
-
-      checkStatusOfTranscription();
-    } else {
-      console.log("try again");
-    }
-    //poll data
+    checkStatusOfTranscription(data.id);
   };
 
   const handleReset = () => {
@@ -92,16 +84,17 @@ const App = () => {
     setTranscript({ id: "" });
   };
 
-  const checkStatusOfTranscription = async () => {
+  const checkStatusOfTranscription = async (id) => {
     while (true) {
-      const pollingResponse = await assemblyAPI.get(
-        `/transcript/${transcript.id}`
-      );
+      const pollingResponse = await assemblyAPI.get(`/transcript/${id}`);
       const transcriptionResult = pollingResponse.data;
 
-      if (transcriptionResult.status === "completed") {
+      if (transcriptionResult.status === "processing") {
+        setIsProcessing(true);
+      } else if (transcriptionResult.status === "completed") {
         console.log(transcriptionResult);
-        setTranscript({ ...transcript, ...transcriptionResult });
+        setIsProcessing(false);
+        setTranscript({ ...transcriptionResult });
         break;
       } else if (transcriptionResult.status === "error") {
         throw new Error(`Transcription failed: ${transcriptionResult.error}`);
@@ -112,8 +105,8 @@ const App = () => {
   };
 
   return (
-    <>
-      <Box sx={{ backgroundColor: "#FDF0D5", height: "100vh" }}>
+    <div className="App">
+      <Box>
         <Container maxWidth="lg">
           <Logo />
           <section>
@@ -150,16 +143,10 @@ const App = () => {
                 size="small"
                 onClick={recorderControls.startRecording}
                 sx={{
-                  borderRadius: "20px",
+                  borderRadius: "10px",
                   textTransform: "capitalize",
                   fontFamily: "Poppins",
                   padding: "5px 15px",
-                  "&:hover": {
-                    backgroundColor: "#1C7C54",
-                  },
-                  "&:focus": {
-                    backgroundColor: "#1C7C54",
-                  },
                 }}
               >
                 Start recording
@@ -170,18 +157,10 @@ const App = () => {
                 size="small"
                 onClick={recorderControls.stopRecording}
                 sx={{
-                  borderRadius: "20px",
+                  borderRadius: "10px",
                   textTransform: "capitalize",
                   fontFamily: "Poppins",
                   padding: "5px 15px",
-                  "&:hover": {
-                    backgroundColor: "#DB162F",
-                    color: "#fff",
-                  },
-                  "&:focus": {
-                    backgroundColor: "#DB162F",
-                    color: "#fff",
-                  },
                 }}
               >
                 Stop recording
@@ -191,22 +170,14 @@ const App = () => {
             {audioDetails.hasBlob && (
               <Box sx={{ marginTop: "20px" }}>
                 <EmbedAudio audioDetails={audioDetails} />
-                <Stack direction="row" spacing={3} sx={{ marginTop: "20px" }}>
+                <Stack direction="row" spacing={2} sx={{ marginTop: "20px" }}>
                   <Button
                     variant="contained"
                     sx={{
-                      borderRadius: "20px",
+                      borderRadius: "10px",
                       textTransform: "capitalize",
                       fontFamily: "Poppins",
                       padding: "5px 15px",
-                      "&:hover": {
-                        backgroundColor: "#1C7C54",
-                        color: "#fff",
-                      },
-                      "&:focus": {
-                        backgroundColor: "#1C7C54",
-                        color: "#fff",
-                      },
                     }}
                     onClick={() =>
                       handleAudioUpload(recorderControls.recordingBlob)
@@ -217,18 +188,10 @@ const App = () => {
                   <Button
                     variant="outlined"
                     sx={{
-                      borderRadius: "20px",
+                      borderRadius: "10px",
                       textTransform: "capitalize",
                       fontFamily: "Poppins",
                       padding: "5px 10px",
-                      "&:hover": {
-                        backgroundColor: "#DB162F",
-                        color: "#fff",
-                      },
-                      "&:focus": {
-                        backgroundColor: "#DB162F",
-                        color: "#fff",
-                      },
                     }}
                     onClick={handleReset}
                   >
@@ -247,7 +210,7 @@ const App = () => {
           </section>
         </Container>
       </Box>
-    </>
+    </div>
   );
 };
 
