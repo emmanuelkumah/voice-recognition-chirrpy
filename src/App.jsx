@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
@@ -31,16 +31,33 @@ const INITIAL_STATE = {
   hasBlob: false,
 };
 const App = () => {
-  const [transcript, setTranscript] = useState({
-    // id: "",
-  });
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [transcriptError, setTranscriptError] = useState("");
-
-  //new states
   const [audioDetails, setAudioDetails] = useState(INITIAL_STATE);
+  const [transcript, setTranscript] = useState({
+    id: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const recorderControls = useAudioRecorder();
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      if (transcript.id && transcript.status !== "completed" && isLoading) {
+        try {
+          const { data: transcriptData } = await assemblyAPI.get(
+            `/transcript/${transcript.id}`
+          );
+          setTranscript({ ...transcript, ...transcriptData });
+          console.log(transcript);
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        setIsLoading(false);
+        clearInterval(interval);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [isLoading, transcript]);
 
   //styling
   const customClasses = {
@@ -63,6 +80,7 @@ const App = () => {
   };
 
   const handleAudioUpload = async (audioFile) => {
+    setIsLoading(true);
     const { data: uploadResponse } = await assemblyAPI.post(
       "/upload",
       audioFile
@@ -76,7 +94,7 @@ const App = () => {
       summary_model: "informative",
       summary_type: "paragraph",
     });
-    checkStatusOfTranscription(data.id);
+    setTranscript({ id: data.id });
   };
 
   const handleReset = () => {
@@ -84,25 +102,31 @@ const App = () => {
     setTranscript({ id: "" });
   };
 
-  const checkStatusOfTranscription = async (id) => {
-    while (true) {
-      const pollingResponse = await assemblyAPI.get(`/transcript/${id}`);
-      const transcriptionResult = pollingResponse.data;
+  // const checkStatusOfTranscription = async (id) => {
+  //   while (true) {
+  //     const pollingResponse = await assemblyAPI.get(`/transcript/${id}`);
+  //     const transcriptionResult = pollingResponse.data;
 
-      if (transcriptionResult.status === "processing") {
-        setIsProcessing(true);
-      } else if (transcriptionResult.status === "completed") {
-        console.log(transcriptionResult);
-        setIsProcessing(false);
-        setTranscript({ ...transcriptionResult });
-        break;
-      } else if (transcriptionResult.status === "error") {
-        throw new Error(`Transcription failed: ${transcriptionResult.error}`);
-      } else {
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-      }
-    }
-  };
+  //     switch (transcriptionResult.status) {
+  //       case "processing":
+  //         setIsProcessing(true);
+
+  //         break;
+  //       case "completed":
+  //         setIsProcessing(false);
+  //         setTranscript({ ...transcriptionResult });
+  //         break;
+  //       case "error":
+  //         // setTranscriptError(transcriptionResult.error);
+  //         throw new Error(`Transcription failed: ${transcriptionResult.error}`);
+
+  //       default:
+  //         await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  //         break;
+  //     }
+  //   }
+  // };
 
   return (
     <div className="App">
@@ -200,13 +224,15 @@ const App = () => {
                 </Stack>
               </Box>
             )}
-            {isProcessing && "Processing...."}
-
-            {transcript.status === "completed" ? (
+            {isLoading && "Loading file...."}
+            {transcript.status === "completed" && (
+              <TranscriptSuccess transcript={transcript} />
+            )}
+            {/* {transcript.status === "completed" ? (
               <TranscriptSuccess transcript={transcript} />
             ) : (
               <TranscriptError transcript={transcript} />
-            )}
+            )} */}
           </section>
         </Container>
       </Box>
