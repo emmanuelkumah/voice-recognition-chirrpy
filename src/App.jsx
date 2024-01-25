@@ -13,6 +13,10 @@ import {
   LinearProgress,
   styled,
   Backdrop,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import EmbedAudio from "./components/EmbedAudio";
 import TranscriptSuccess from "./components/Transcript/TranscriptSuccess";
@@ -39,7 +43,7 @@ const App = () => {
     id: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const recorderControls = useAudioRecorder();
 
@@ -74,6 +78,12 @@ const App = () => {
       border: "1px solid red",
     },
   }));
+  const StyledBtn = styled(Button)(({ theme }) => ({
+    textTransform: "capitalize",
+    fontFamily: "Poppins",
+    borderRadius: "10px",
+    size: "small",
+  }));
 
   const displayAudioElement = (blob) => {
     const url = URL.createObjectURL(blob);
@@ -85,7 +95,7 @@ const App = () => {
   };
 
   const handleAudioUpload = async (audioFile) => {
-    setIsLoading(true);
+    setOpen(false);
     const { data: uploadResponse } = await assemblyAPI.post(
       "/upload",
       audioFile
@@ -100,9 +110,11 @@ const App = () => {
       summary_type: "paragraph",
     });
     setTranscript({ id: data.id });
+    setIsLoading(true);
   };
 
   const handleReset = () => {
+    setOpen(false);
     setAudioDetails({ ...INITIAL_STATE });
     setTranscript({ id: "" });
   };
@@ -112,32 +124,6 @@ const App = () => {
 
     recorderControls.stopRecording;
   };
-
-  // const checkStatusOfTranscription = async (id) => {
-  //   while (true) {
-  //     const pollingResponse = await assemblyAPI.get(`/transcript/${id}`);
-  //     const transcriptionResult = pollingResponse.data;
-
-  //     switch (transcriptionResult.status) {
-  //       case "processing":
-  //         setIsProcessing(true);
-
-  //         break;
-  //       case "completed":
-  //         setIsProcessing(false);
-  //         setTranscript({ ...transcriptionResult });
-  //         break;
-  //       case "error":
-  //         // setTranscriptError(transcriptionResult.error);
-  //         throw new Error(`Transcription failed: ${transcriptionResult.error}`);
-
-  //       default:
-  //         await new Promise((resolve) => setTimeout(resolve, 3000));
-
-  //         break;
-  //     }
-  //   }
-  // };
 
   return (
     <div className="App">
@@ -201,14 +187,29 @@ const App = () => {
                 Stop recording
               </Button>
             </Stack>
-            {/* Background */}
-            <Backdrop
-              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-              open={open}
-              onClick={() => setOpen(false)}
-            >
-              <EmbedAudio audioDetails={audioDetails} />
-            </Backdrop>
+            <Dialog open={open} onClose={() => setOpen(false)}>
+              <DialogTitle sx={{ fontFamily: "Poppins", fontSize: "20px" }}>
+                Listen to the recorded speech
+              </DialogTitle>
+              <DialogContent>
+                <EmbedAudio audioDetails={audioDetails} />
+              </DialogContent>
+              <DialogActions>
+                <Stack direction="row" spacing={2}>
+                  <StyledBtn
+                    variant="contained"
+                    onClick={() =>
+                      handleAudioUpload(recorderControls.recordingBlob)
+                    }
+                  >
+                    Transcribe
+                  </StyledBtn>
+                  <StyledBtn variant="outlined" onClick={handleReset}>
+                    Reset
+                  </StyledBtn>
+                </Stack>
+              </DialogActions>
+            </Dialog>
 
             {transcript.status === "completed" ? (
               <TranscriptSuccess transcript={transcript} />
