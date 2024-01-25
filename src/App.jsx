@@ -10,6 +10,7 @@ import {
   Container,
   Stack,
   Typography,
+  LinearProgress,
   styled,
 } from "@mui/material";
 import EmbedAudio from "./components/EmbedAudio";
@@ -224,15 +225,15 @@ const App = () => {
                 </Stack>
               </Box>
             )}
-            {isLoading && "Loading file...."}
-            {transcript.status === "completed" && (
-              <TranscriptSuccess transcript={transcript} />
-            )}
-            {/* {transcript.status === "completed" ? (
+            {transcript.status === "completed" ? (
               <TranscriptSuccess transcript={transcript} />
             ) : (
-              <TranscriptError transcript={transcript} />
-            )} */}
+              isLoading && (
+                <Box sx={{ width: "100%", marginTop: "40px" }}>
+                  <LinearProgress />
+                </Box>
+              )
+            )}
           </section>
         </Container>
       </Box>
