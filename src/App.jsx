@@ -188,7 +188,13 @@ const App = () => {
               </Button>
             </Stack>
             <Dialog open={open} onClose={() => setOpen(false)}>
-              <DialogTitle sx={{ fontFamily: "Poppins", fontSize: "20px" }}>
+              <DialogTitle
+                sx={{
+                  fontFamily: "Poppins",
+                  fontSize: "20px",
+                  textAlign: "center",
+                }}
+              >
                 Listen to the recorded speech
               </DialogTitle>
               <DialogContent>
