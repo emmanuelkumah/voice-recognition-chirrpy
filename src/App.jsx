@@ -12,6 +12,7 @@ import {
   Typography,
   LinearProgress,
   styled,
+  Backdrop,
 } from "@mui/material";
 import EmbedAudio from "./components/EmbedAudio";
 import TranscriptSuccess from "./components/Transcript/TranscriptSuccess";
@@ -30,6 +31,7 @@ const INITIAL_STATE = {
   blob: "",
   url: "",
   hasBlob: false,
+  open: false,
 };
 const App = () => {
   const [audioDetails, setAudioDetails] = useState(INITIAL_STATE);
@@ -37,6 +39,7 @@ const App = () => {
     id: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const recorderControls = useAudioRecorder();
 
@@ -74,7 +77,8 @@ const App = () => {
 
   const displayAudioElement = (blob) => {
     const url = URL.createObjectURL(blob);
-    setAudioDetails({ ...audioDetails, url: url, hasBlob: true });
+    setAudioDetails({ ...audioDetails, url: url, hasBlob: true, open: true });
+    setOpen(true);
   };
   const handleAudioStop = (data) => {
     setAudioDetails(data);
@@ -101,6 +105,12 @@ const App = () => {
   const handleReset = () => {
     setAudioDetails({ ...INITIAL_STATE });
     setTranscript({ id: "" });
+  };
+
+  const handleStopRecording = () => {
+    // setOpenModal(true);
+
+    recorderControls.stopRecording;
   };
 
   // const checkStatusOfTranscription = async (id) => {
@@ -191,40 +201,15 @@ const App = () => {
                 Stop recording
               </Button>
             </Stack>
+            {/* Background */}
+            <Backdrop
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={open}
+              onClick={() => setOpen(false)}
+            >
+              <EmbedAudio audioDetails={audioDetails} />
+            </Backdrop>
 
-            {audioDetails.hasBlob && (
-              <Box sx={{ marginTop: "20px" }}>
-                <EmbedAudio audioDetails={audioDetails} />
-                <Stack direction="row" spacing={2} sx={{ marginTop: "20px" }}>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      borderRadius: "10px",
-                      textTransform: "capitalize",
-                      fontFamily: "Poppins",
-                      padding: "5px 15px",
-                    }}
-                    onClick={() =>
-                      handleAudioUpload(recorderControls.recordingBlob)
-                    }
-                  >
-                    Transcribe speech
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      borderRadius: "10px",
-                      textTransform: "capitalize",
-                      fontFamily: "Poppins",
-                      padding: "5px 10px",
-                    }}
-                    onClick={handleReset}
-                  >
-                    Reset speech
-                  </Button>
-                </Stack>
-              </Box>
-            )}
             {transcript.status === "completed" ? (
               <TranscriptSuccess transcript={transcript} />
             ) : (
