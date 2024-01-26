@@ -8,6 +8,7 @@ import {
   Backdrop,
   Divider,
   Paper,
+  Tooltip,
 } from "@mui/material";
 import html2PDF from "jspdf-html2canvas";
 
@@ -67,7 +68,7 @@ const TranscriptSuccess = ({ transcript }) => {
           overflow: "auto",
         }}
       >
-        <Typography variant="h4">Speech Transcribed😃  </Typography>
+        <Typography variant="h4">Hey! We have it ✌🏽 💪🏾 </Typography>
         <Divider />
         <Typography variant="body1" sx={{ paddingTop: "10px" }}>
           {transcript.text}
@@ -78,36 +79,44 @@ const TranscriptSuccess = ({ transcript }) => {
         spacing={3}
         sx={{ marginTop: "20px", marginBottom: "20px" }}
       >
-        <Avatar
-          sx={{
-            "&:hover": {
-              bgcolor: "#6E4555",
-            },
-          }}
-          onClick={handleOpenSummaryModal}
-        >
-          <SummarizeIcon />
-        </Avatar>
-        <Avatar
-          sx={{ "&:hover": { bgcolor: "#E8B4BC" } }}
-          onClick={() => setActions({ ...actions, showSentiment: true })}
-        >
-          <SentimentSatisfiedAltIcon />
-        </Avatar>
-        <Avatar
-          sx={{
-            "&:hover": {
-              bgcolor: "#3A3238",
-            },
-          }}
-        >
-          <TopicIcon
-            onClick={() => setActions({ ...actions, showTopic: true })}
-          />
-        </Avatar>
-        <Avatar sx={{ "&:hover": { bgcolor: "#880e4f" } }}>
-          <DownloadIcon onClick={handleTranscribeDownload} />
-        </Avatar>
+        <Tooltip title="Summary" arrow>
+          <Avatar
+            sx={{
+              "&:hover": {
+                bgcolor: "#6E4555",
+              },
+            }}
+            onClick={handleOpenSummaryModal}
+          >
+            <SummarizeIcon />
+          </Avatar>
+        </Tooltip>
+        <Tooltip title="Sentiments" arrow>
+          <Avatar
+            sx={{ "&:hover": { bgcolor: "#E8B4BC" } }}
+            onClick={() => setActions({ ...actions, showSentiment: true })}
+          >
+            <SentimentSatisfiedAltIcon />
+          </Avatar>
+        </Tooltip>
+        <Tooltip title="Topic">
+          <Avatar
+            sx={{
+              "&:hover": {
+                bgcolor: "#3A3238",
+              },
+            }}
+          >
+            <TopicIcon
+              onClick={() => setActions({ ...actions, showTopic: true })}
+            />
+          </Avatar>
+        </Tooltip>
+        <Tooltip title="Download" arrow>
+          <Avatar sx={{ "&:hover": { bgcolor: "#880e4f" } }}>
+            <DownloadIcon onClick={handleTranscribeDownload} />
+          </Avatar>
+        </Tooltip>
       </Stack>
 
       <Backdrop

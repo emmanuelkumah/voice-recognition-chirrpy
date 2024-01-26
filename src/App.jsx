@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import axios from "axios";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 import "./audio-recorder.css";
@@ -12,16 +11,13 @@ import {
   Typography,
   LinearProgress,
   styled,
-  Backdrop,
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogActions,
 } from "@mui/material";
 import EmbedAudio from "./components/EmbedAudio";
 import TranscriptSuccess from "./components/Transcript/TranscriptSuccess";
 import TranscriptError from "./components/Transcript/TranscriptError";
-import { yellow } from "@mui/material/colors";
 
 const assemblyAPI = axios.create({
   baseURL: "https://api.assemblyai.com/v2",
@@ -126,7 +122,7 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div>
       <Box>
         <Container maxWidth="lg">
           <Logo />
@@ -188,15 +184,6 @@ const App = () => {
               </Button>
             </Stack>
             <Dialog open={open} onClose={() => setOpen(false)}>
-              <DialogTitle
-                sx={{
-                  fontFamily: "Poppins",
-                  fontSize: "20px",
-                  textAlign: "center",
-                }}
-              >
-                Listen to the recorded speech 🎧
-              </DialogTitle>
               <DialogContent>
                 <EmbedAudio audioDetails={audioDetails} />
               </DialogContent>
@@ -222,6 +209,7 @@ const App = () => {
             ) : (
               isLoading && (
                 <Box sx={{ width: "100%", marginTop: "40px" }}>
+                  <Typography>🚀 Getting things ready</Typography>
                   <LinearProgress />
                 </Box>
               )

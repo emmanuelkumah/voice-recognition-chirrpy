@@ -12,7 +12,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Poppins Titillium Web cursive",
+    fontFamily: "Poppins",
     fontSize: 16,
     fontWeight: 400,
 
