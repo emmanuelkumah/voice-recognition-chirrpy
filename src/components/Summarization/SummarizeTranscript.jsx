@@ -1,12 +1,16 @@
-import React from "react";
+import { Paper, Typography, Container, Divider } from "@mui/material";
 
 const SummarizeTranscript = ({ summary }) => {
-  console.log(summary);
   return (
-    <div>
-      <h2>Transcript Summary</h2>
-      {summary}
-    </div>
+    <>
+      <Container>
+        <Paper sx={{ padding: "20px" }}>
+          <Typography variant="h4">Transcript Summary</Typography>
+          <Divider />
+          <Typography variant="body1">{summary}</Typography>
+        </Paper>
+      </Container>
+    </>
   );
 };
 

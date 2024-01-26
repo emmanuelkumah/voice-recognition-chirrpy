@@ -13,7 +13,7 @@ const Highlighted = ({ text, sentiment }) => {
       <Box>
         <Typography
           variant="body1"
-          sx={{ backgroundColor: sentimentColor[sentiment] }}
+          sx={{ backgroundColor: sentimentColor[sentiment], padding: "5px" }}
         >
           {text}
         </Typography>

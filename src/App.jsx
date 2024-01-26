@@ -135,8 +135,8 @@ const App = () => {
               variant="h4"
               sx={{ paddingTop: "30px", paddingBottom: "30px" }}
             >
-              Howdy!, let's trancribe your speech into accurate text using our
-              AI
+              Howdy! 👋🏾, let's trancribe your speech into accurate text using
+              our AI
             </Typography>
 
             <AudioRecorder
@@ -155,7 +155,7 @@ const App = () => {
               sx={{ fontSize: "15px", marginTop: "20px" }}
             >
               To start, click on the "start recording" button or the microphone
-              icon
+              icon 🎙️
             </Typography>
             <Stack direction="row" spacing={3} sx={{ marginTop: "20px" }}>
               <Button
@@ -195,7 +195,7 @@ const App = () => {
                   textAlign: "center",
                 }}
               >
-                Listen to the recorded speech
+                Listen to the recorded speech 🎧
               </DialogTitle>
               <DialogContent>
                 <EmbedAudio audioDetails={audioDetails} />

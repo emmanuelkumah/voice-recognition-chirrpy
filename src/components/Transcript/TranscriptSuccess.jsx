@@ -1,4 +1,14 @@
-import { Typography, Box, styled, Button, Stack, Avatar } from "@mui/material";
+import {
+  Typography,
+  Box,
+  styled,
+  Button,
+  Stack,
+  Avatar,
+  Backdrop,
+  Divider,
+  Paper,
+} from "@mui/material";
 import html2PDF from "jspdf-html2canvas";
 
 import { theme } from "../../theme";
@@ -10,7 +20,6 @@ import SummarizeIcon from "@mui/icons-material/Summarize";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import TopicIcon from "@mui/icons-material/Topic";
 import DownloadIcon from "@mui/icons-material/Download";
-import { yellow } from "@mui/material/colors";
 
 const TranscriptSuccess = ({ transcript }) => {
   const [actions, setActions] = useState({
@@ -18,7 +27,6 @@ const TranscriptSuccess = ({ transcript }) => {
     showSummary: false,
     showTopic: false,
   });
-
   const transcribeRef = useRef(null);
   const StyledBox = styled(Box)(({ theme }) => ({
     background: "#fff",
@@ -45,41 +53,91 @@ const TranscriptSuccess = ({ transcript }) => {
     });
   };
 
+  const handleOpenSummaryModal = () => {
+    setActions({ ...actions, showSummary: true });
+  };
   return (
     <>
-      <StyledBox ref={transcribeRef}>
-        <Typography variant="body1">{transcript.text}</Typography>
-      </StyledBox>
-      <Stack direction="row" spacing={3} sx={{ marginTop: "20px" }}>
+      <Paper
+        ref={transcribeRef}
+        sx={{
+          padding: "20px",
+          marginTop: "20px",
+          maxHeight: "400px",
+          overflow: "auto",
+        }}
+      >
+        <Typography variant="h4">Speech Transcribed😃  </Typography>
+        <Divider />
+        <Typography variant="body1" sx={{ paddingTop: "10px" }}>
+          {transcript.text}
+        </Typography>
+      </Paper>
+      <Stack
+        direction="row"
+        spacing={3}
+        sx={{ marginTop: "20px", marginBottom: "20px" }}
+      >
         <Avatar
-          sx={{ bgcolor: "#6E4555" }}
-          onClick={() => setActions({ ...actions, showSummary: true })}
+          sx={{
+            "&:hover": {
+              bgcolor: "#6E4555",
+            },
+          }}
+          onClick={handleOpenSummaryModal}
         >
           <SummarizeIcon />
         </Avatar>
         <Avatar
-          sx={{ bgcolor: "#E8B4BC" }}
+          sx={{ "&:hover": { bgcolor: "#E8B4BC" } }}
           onClick={() => setActions({ ...actions, showSentiment: true })}
         >
           <SentimentSatisfiedAltIcon />
         </Avatar>
-        <Avatar sx={{ bgcolor: "#3A3238" }}>
+        <Avatar
+          sx={{
+            "&:hover": {
+              bgcolor: "#3A3238",
+            },
+          }}
+        >
           <TopicIcon
             onClick={() => setActions({ ...actions, showTopic: true })}
           />
         </Avatar>
-        <Avatar sx={{ bgcolor: "#880e4f" }}>
+        <Avatar sx={{ "&:hover": { bgcolor: "#880e4f" } }}>
           <DownloadIcon onClick={handleTranscribeDownload} />
         </Avatar>
       </Stack>
 
-      {actions.showSentiment && (
-        <Sentiment sentimentAnalysis={transcript.sentiment_analysis_results} />
-      )}
-      {actions.showSummary && (
-        <SummarizeTranscript summary={transcript.summary} />
-      )}
-      {actions.showTopic && <TopicDetection transcript={transcript} />}
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={actions.showSummary}
+        onClick={() => setActions({ ...actions, showSummary: false })}
+      >
+        {actions.showSummary && (
+          <SummarizeTranscript summary={transcript.summary} />
+        )}
+      </Backdrop>
+
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={actions.showSentiment}
+        onClick={() => setActions({ ...actions, showSentiment: false })}
+      >
+        {actions.showSentiment && (
+          <Sentiment
+            sentimentAnalysis={transcript.sentiment_analysis_results}
+          />
+        )}
+      </Backdrop>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={actions.showTopic}
+        onClick={() => setActions({ ...actions, showTopic: false })}
+      >
+        {actions.showTopic && <TopicDetection transcript={transcript} />}
+      </Backdrop>
     </>
   );
 };
