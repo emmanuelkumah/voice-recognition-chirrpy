@@ -2,6 +2,7 @@ import React from "react";
 
 import { Button, styled } from "@mui/material";
 import { theme } from "../../theme";
+import { Link } from "react-router-dom";
 
 const Btn = ({ text, variant, marginTop }) => {
   const StyledButton = styled(Button)(({ theme }) => ({
@@ -18,9 +19,11 @@ const Btn = ({ text, variant, marginTop }) => {
   }));
   return (
     <div>
-      <StyledButton variant={variant} disableElevation>
-        {text}
-      </StyledButton>
+      <Link to="/app">
+        <StyledButton variant={variant} disableElevation>
+          {text}
+        </StyledButton>
+      </Link>
     </div>
   );
 };

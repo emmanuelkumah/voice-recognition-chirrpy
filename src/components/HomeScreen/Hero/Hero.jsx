@@ -53,7 +53,7 @@ const Hero = () => {
 
   const StyledButtonBox = styled(Box)(({ theme }) => ({
     display: "flex",
-    gap: "20px",
+    justifyContent: "space-between",
     marginTop: "1rem",
     [theme.breakpoints.up("md")]: {
       gap: "40px",
@@ -62,7 +62,7 @@ const Hero = () => {
 
   const StyledBlurBackground = styled(CardMedia)(() => ({
     position: "absolute",
-    top: "-25%",
+    top: "35%",
     [theme.breakpoints.up("sm")]: {
       position: "relative",
       top: "-40%",
@@ -88,9 +88,7 @@ const Hero = () => {
               </StyledDescriptionBox>
 
               <StyledButtonBox>
-                <Link to="/app">
-                  <Btn text="Try for free" variant="contained" />
-                </Link>
+                <Btn text="Try for free" variant="contained" />
                 <Btn text="Watch Demo" variant="outlined" />
               </StyledButtonBox>
             </Box>
