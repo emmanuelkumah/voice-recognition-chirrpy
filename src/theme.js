@@ -43,7 +43,6 @@ export const theme = createTheme({
     navItems: {
       fontSize: "18px",
       fontFamily: "Titillium Web",
-      fontWeight: 600,
     },
 
     breakpoints: {

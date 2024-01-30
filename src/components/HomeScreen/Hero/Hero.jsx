@@ -11,6 +11,7 @@ import { theme } from "../../../theme";
 import Btn from "../../UI/Button";
 import heroImage from "../../../assets/images/heroImg.png";
 import heroBlur from "../../../assets/images/heroBlur.png";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const HeroContainer = styled(Box)(({ theme }) => ({
@@ -63,10 +64,9 @@ const Hero = () => {
     position: "absolute",
     top: "-25%",
     [theme.breakpoints.up("sm")]: {
-      display: "none",
-      // position: "absolute",
-      // top: "-20%",
-      // left: "25%",
+      position: "relative",
+      top: "-40%",
+      left: "26%",
     },
   }));
 
@@ -88,7 +88,9 @@ const Hero = () => {
               </StyledDescriptionBox>
 
               <StyledButtonBox>
-                <Btn text="Try for free" variant="contained" />
+                <Link to="/app">
+                  <Btn text="Try for free" variant="contained" />
+                </Link>
                 <Btn text="Watch Demo" variant="outlined" />
               </StyledButtonBox>
             </Box>

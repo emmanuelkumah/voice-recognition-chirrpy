@@ -107,15 +107,19 @@ const Navigation = () => {
                 }}
               >
                 {navItems.map((item) => (
-                  <MenuItem
-                    onClick={handleCloseNavMenu}
-                    sx={{ width: "100vw" }}
-                    key={item.id}
-                  >
-                    <Typography textAlign="center" variant="navItems">
-                      {item.menu}
-                    </Typography>
-                  </MenuItem>
+                  <HashLink to={item.to}>
+                    <Button>
+                      <MenuItem
+                        onClick={handleCloseNavMenu}
+                        sx={{ width: "90vw" }}
+                        key={item.id}
+                      >
+                        <Typography textAlign="center" variant="navItems">
+                          {item.menu}
+                        </Typography>
+                      </MenuItem>
+                    </Button>
+                  </HashLink>
                 ))}
               </Menu>
             </Box>

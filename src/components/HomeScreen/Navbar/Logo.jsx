@@ -8,7 +8,7 @@ const Logo = () => {
 
   return (
     <>
-      <Box component="a">
+      <Box component="a" href="/">
         <StyledLogo src={chirrpyLogo} alt="Chirrpy logo" />
       </Box>
     </>
