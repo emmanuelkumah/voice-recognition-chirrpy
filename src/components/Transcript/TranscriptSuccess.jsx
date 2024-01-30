@@ -13,7 +13,7 @@ import {
 import html2PDF from "jspdf-html2canvas";
 
 import { theme } from "../../theme";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Sentiment from "../SentimentAnalysis/Sentiment";
 import SummarizeTranscript from "../Summarization/SummarizeTranscript";
 import TopicDetection from "../TopicDetection/TopicDetection";
@@ -29,6 +29,7 @@ const TranscriptSuccess = ({ transcript }) => {
     showTopic: false,
   });
   const transcribeRef = useRef(null);
+
   const StyledBox = styled(Box)(({ theme }) => ({
     background: "#fff",
     width: "100%",

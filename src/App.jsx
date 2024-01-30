@@ -39,6 +39,7 @@ const App = () => {
     id: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+
   const [open, setOpen] = useState(false);
 
   const recorderControls = useAudioRecorder();
@@ -51,7 +52,7 @@ const App = () => {
             `/transcript/${transcript.id}`
           );
           setTranscript({ ...transcript, ...transcriptData });
-          console.log(transcript);
+          //cached data
         } catch (error) {
           console.error(error);
         }
@@ -206,13 +207,13 @@ const App = () => {
 
             {transcript.status === "completed" ? (
               <TranscriptSuccess transcript={transcript} />
+            ) : isLoading ? (
+              <Box sx={{ width: "100%", marginTop: "40px" }}>
+                <Typography>🚀 Getting things ready</Typography>
+                <LinearProgress />
+              </Box>
             ) : (
-              isLoading && (
-                <Box sx={{ width: "100%", marginTop: "40px" }}>
-                  <Typography>🚀 Getting things ready</Typography>
-                  <LinearProgress />
-                </Box>
-              )
+              <TranscriptError transcript={transcript} />
             )}
           </section>
         </Container>
