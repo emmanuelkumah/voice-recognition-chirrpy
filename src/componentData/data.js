@@ -71,27 +71,27 @@ export const navItems = [
   {
     id: 1,
     menu: "Home",
-    to: "/",
+    to: "/#home",
   },
   {
     id: 2,
     menu: "Why Chirrpy",
-    to: "/why",
+    to: "/#why",
   },
   {
     id: 3,
     menu: "How It Works",
-    to: "/how",
+    to: "/#how-it-works",
   },
   {
     id: 4,
     menu: "Use Cases",
-    to: "/usecase",
+    to: "/#usecase",
   },
   {
     id: 5,
     menu: "Features",
-    to: "/features",
+    to: "/#features",
   },
 ];
 

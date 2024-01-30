@@ -10,41 +10,39 @@ const Features = () => {
   }));
 
   return (
-    <>
-      <StyledSectionBackground id="features">
-        <Container>
-          <Typography
-            variant="h3"
-            sx={{
-              color: "#fff",
-              textAlign: "center",
-              paddingTop: "2rem",
-            }}
-          >
-            Features
-          </Typography>
-          <Typography
-            variant="subTitle1"
-            sx={{
-              color: "#fff",
-              display: "grid",
-              placeItems: "center",
-              paddingTop: "1rem",
-              paddingBottom: "1rem",
-            }}
-          >
-            What is under the hood of our voice recognition service
-          </Typography>
-          <Grid container spacing={2}>
-            {featuresData.map((item) => (
-              <Grid item xs={12} sm={3} key={item.id}>
-                <FeaturesCard item={item} />
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </StyledSectionBackground>
-    </>
+    <StyledSectionBackground id="features">
+      <Container>
+        <Typography
+          variant="h3"
+          sx={{
+            color: "#fff",
+            textAlign: "center",
+            paddingTop: "2rem",
+          }}
+        >
+          Features
+        </Typography>
+        <Typography
+          variant="subTitle1"
+          sx={{
+            color: "#fff",
+            display: "grid",
+            placeItems: "center",
+            paddingTop: "1rem",
+            paddingBottom: "1rem",
+          }}
+        >
+          What is under the hood of our voice recognition service
+        </Typography>
+        <Grid container spacing={2}>
+          {featuresData.map((item) => (
+            <Grid item xs={12} sm={3} key={item.id}>
+              <FeaturesCard item={item} />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </StyledSectionBackground>
   );
 };
 

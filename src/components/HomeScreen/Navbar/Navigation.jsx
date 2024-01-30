@@ -9,12 +9,12 @@ import {
   styled,
   MenuItem,
   Typography,
+  Button,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { theme } from "../../../theme";
 import { navItems } from "../../../componentData/data";
 import { HashLink } from "react-router-hash-link";
-import { Link } from "react-router-dom";
 
 import Logo from "./Logo";
 
@@ -44,6 +44,7 @@ const Navigation = () => {
     fontFamily: "Titillium Web",
     fontWeight: 600,
     display: "none",
+    cursor: "pointer",
     [theme.breakpoints.up("sm")]: {
       display: "flex",
       justifyContent: "flex-end",
@@ -58,14 +59,16 @@ const Navigation = () => {
         <Container maxWidth="lg">
           <StyledToolBar disableGutters>
             <Logo />
-
             <StyledNavMenu>
               {navItems.map((item) => (
-                <MenuItem key={item.id}>
-                  <Typography variant="navItems">{item.menu}</Typography>
-                </MenuItem>
+                <HashLink smooth to={item.to}>
+                  <Button key={item.id}>
+                    <Typography variant="navItems">{item.menu}</Typography>
+                  </Button>
+                </HashLink>
               ))}
             </StyledNavMenu>
+
             {/* Responsive menu */}
             <Box
               sx={{

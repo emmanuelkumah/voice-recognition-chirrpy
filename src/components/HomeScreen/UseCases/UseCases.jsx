@@ -14,7 +14,7 @@ const UseCases = () => {
 
   return (
     <>
-      <StyledSectionBackground>
+      <StyledSectionBackground id="usecase">
         <Container sx={{ pt: "2rem" }}>
           <Typography
             variant="h3"

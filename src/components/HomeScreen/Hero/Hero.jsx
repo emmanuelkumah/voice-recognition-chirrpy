@@ -63,14 +63,15 @@ const Hero = () => {
     position: "absolute",
     top: "-25%",
     [theme.breakpoints.up("sm")]: {
-      position: "absolute",
-      top: "-20%",
-      left: "25%",
+      display: "none",
+      // position: "absolute",
+      // top: "-20%",
+      // left: "25%",
     },
   }));
 
   return (
-    <HeroContainer id="hero">
+    <HeroContainer id="home">
       <Container maxWidth="lg">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>

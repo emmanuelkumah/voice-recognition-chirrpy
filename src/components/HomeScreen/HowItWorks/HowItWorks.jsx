@@ -23,53 +23,51 @@ const HowItWorks = () => {
   }));
 
   return (
-    <>
-      <StyledSectionBackground>
-        <Container maxWidth="lg">
-          <Typography
-            variant="h3"
-            align="center"
-            sx={{
-              paddingTop: "30px",
-              color: theme.palette.primary.main,
-            }}
-          >
-            How It Works
-          </Typography>
-          <Typography variant="body1" align="center">
-            Swift actions, better results
-          </Typography>
-          <Grid
-            container
-            sx={{ flexGrow: 1, position: "relative", paddingBottom: "20px" }}
-          >
-            {howItWorksData.map((item) => (
-              <Grid item xs={12} sm={4} key={item.id}>
-                <StyledIcon src={item.icon} />
-                <Paper
-                  square
+    <StyledSectionBackground id="how-it-works">
+      <Container maxWidth="lg">
+        <Typography
+          variant="h3"
+          align="center"
+          sx={{
+            paddingTop: "30px",
+            color: theme.palette.primary.main,
+          }}
+        >
+          How It Works
+        </Typography>
+        <Typography variant="body1" align="center">
+          Swift actions, better results
+        </Typography>
+        <Grid
+          container
+          sx={{ flexGrow: 1, position: "relative", paddingBottom: "20px" }}
+        >
+          {howItWorksData.map((item) => (
+            <Grid item xs={12} sm={4} key={item.id}>
+              <StyledIcon src={item.icon} />
+              <Paper
+                square
+                sx={{
+                  background: item.bgColor,
+                  height: 176,
+                  color: "#fff",
+                  borderRadius: item.radius,
+                }}
+              >
+                <Typography
+                  variant="body1"
                   sx={{
-                    background: item.bgColor,
-                    height: 176,
-                    color: "#fff",
-                    borderRadius: item.radius,
+                    ...commonTypographyStyles,
                   }}
                 >
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      ...commonTypographyStyles,
-                    }}
-                  >
-                    {item.text}
-                  </Typography>
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </StyledSectionBackground>
-    </>
+                  {item.text}
+                </Typography>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </StyledSectionBackground>
   );
 };
 
