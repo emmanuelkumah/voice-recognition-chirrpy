@@ -52,7 +52,6 @@ const App = () => {
             `/transcript/${transcript.id}`
           );
           setTranscript({ ...transcript, ...transcriptData });
-          //cached data
         } catch (error) {
           console.error(error);
         }
