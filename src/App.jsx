@@ -41,7 +41,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [open, setOpen] = useState(false);
-
+  const [showError, setShowError] = useState("");
   const recorderControls = useAudioRecorder();
 
   useEffect(() => {
@@ -54,6 +54,7 @@ const App = () => {
           setTranscript({ ...transcript, ...transcriptData });
         } catch (error) {
           console.error(error);
+          setShowError(error);
         }
       } else {
         setIsLoading(false);
@@ -96,6 +97,7 @@ const App = () => {
       "/upload",
       audioFile
     );
+    console.log(uploadResponse);
     const { data } = await assemblyAPI.post("/transcript", {
       audio_url: uploadResponse.upload_url,
       sentiment_analysis: true,
@@ -105,6 +107,7 @@ const App = () => {
       summary_model: "informative",
       summary_type: "paragraph",
     });
+    console.log(data);
     setTranscript({ id: data.id });
     setIsLoading(true);
   };
