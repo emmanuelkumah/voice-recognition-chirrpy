@@ -10,7 +10,6 @@ import React from "react";
 import { theme } from "../../../theme";
 import Btn from "../../UI/Button";
 import heroImage from "../../../assets/images/heroImg.png";
-import heroBlur from "../../../assets/images/heroBlur.png";
 
 const Hero = () => {
   const HeroContainer = styled(Box)(({ theme }) => ({
@@ -63,9 +62,9 @@ const Hero = () => {
     position: "absolute",
     top: "35%",
     [theme.breakpoints.up("sm")]: {
-      position: "relative",
+      position: "absolute",
       top: "-40%",
-      left: "26%",
+      left: "60%",
     },
   }));
 
@@ -98,11 +97,6 @@ const Hero = () => {
               style={{
                 width: "100%",
               }}
-            />
-            <StyledBlurBackground
-              component="img"
-              image={heroBlur}
-              alt="Crimson blur background on the right of the hero image"
             />
           </Grid>
         </Grid>

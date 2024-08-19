@@ -14,7 +14,7 @@ export const theme = createTheme({
   typography: {
     fontFamily: "Poppins",
     fontSize: 16,
-    fontWeight: 400,
+    fontWeight: 300,
 
     h1: {
       fontSize: 56,
@@ -23,7 +23,7 @@ export const theme = createTheme({
     },
     h3: {
       fontSize: 36,
-      fontWeight: 700,
+      fontWeight: 400,
       fontFamily: "Titillium Web",
     },
     h4: {
